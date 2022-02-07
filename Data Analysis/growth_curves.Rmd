@@ -1,0 +1,127 @@
+---
+title: "growth_curves"
+author: "Kaitlyn Li"
+date: "12/3/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(zoo)
+library(moderndive)
+```
+
+
+```{r avg}
+tecan_tidy <- read.csv("~/Thesis/RRR_Bacteria/Data/tecan_tidy.csv")
+
+tecan_avg <- tecan_tidy %>%
+  group_by(strain, time)%>%
+  summarise(avg_A600 = mean(a600))
+```
+
+```{r plot1}
+ggplot(tecan_avg, aes(x = time, y = avg_A600)) +
+  geom_point(aes(shape = strain, color = strain)) +
+  labs(title = "Growth Curves from 24 hour Tecan Run in LB", 
+       x = "Time (sec)",
+       y = "Absorbance at 600nm") +
+  scale_colour_manual(name = "Strain",
+                      labels = c("1F1", "1F5", "1FH2", "CM1", "CONTROL", "DH5A", "DRAD"),
+                      values = c("red", "orange", "darkgoldenrod1", "green", "blue", "salmon", "violet")) +   
+  scale_shape_manual(name = "Strain",
+                     labels = c("1F1", "1F5", "1FH2", "CM1", "CONTROL", "DH5A", "DRAD"),
+                     values = c(0, 1, 2, 3, 4, 5, 6, 8))
+#in order for shape and color to be on the same legend, the manual settings must be the same in name and label. shape values are for specific shapes
+```
+
+```{r dfs}
+dh5a <- tecan_avg %>%
+  filter(strain == "DH5A")
+
+f1 <- tecan_avg %>%
+  filter(strain == "1F1")
+
+f5 <- tecan_avg %>%
+  filter(strain == "1F5")
+
+fh2 <- tecan_avg %>%
+  filter(strain == "1FH2")
+
+cm1 <- tecan_avg %>%
+  filter(strain == "CM1")
+
+drad <- tecan_avg %>%
+  filter(strain == "DRAD")
+
+strain_dfs <- list(dh5a, drad, f1, f5, fh2, cm1)
+
+```
+
+```{r functions}
+lin_eq <- function (df) {            # this function returns a slope
+  d <- as.data.frame(df) 
+  lin_mod <- lm(avg_A600~time, d)    # m <- lm(y~x, as.data.frame(d)). outputs the linear model as list of values
+  slope_temp <- coef(lin_mod)[2]
+  return(slope_temp)
+} 
+
+lm_optimize <- function(df) {                                # this function calculates many slopes returns values with most common slope
+  d <- as.data.frame(df) 
+  applied <- rollapply(d, 2, lin_eq, by.column = F)          # 3 is the reading frame of data. runs function many times. 
+  clustering <- kmeans(applied, 4)                           # 3 is sets of matching. higher number results in fewer points per set
+  cluster_positions <- which(clustering$cluster == match(max(clustering$centers), clustering$centers))+1   # looks for position of values
+  RES <- d[cluster_positions,]                               # collects the best cluster set for best linear model. outputs df. 
+  return(RES)
+  }
+
+```
+
+```{r run}
+# all the values put into one df for ease of graphing
+tecan_sets <- data.frame()
+i <- 1
+for (i in 1:length(strain_dfs)) {
+  d <- as.data.frame(strain_dfs[[i]])
+  temp <- as.data.frame(lm_optimize(d))
+  tecan_sets <- bind_rows(tecan_sets, temp)
+  i <- i + 1
+} 
+
+# all the lm variables consolidated for easy comparison
+lms_sets <- data.frame("CONTROL", 0, 0)
+names(lms_sets) <- c("strain", "intercept", "slope")
+i <- 1
+for (i in 1:length(strain_dfs)) {
+  d <- as.data.frame(strain_dfs[[i]])
+  temp <- as.data.frame(lm_optimize(d))
+  lin_mod <- lm(avg_A600~time, temp)    
+  lms_sets <- rbind(lms_sets, c(strain = d[[1,1]],
+                        intercept = coef(lin_mod)[1],
+                        slope = coef(lin_mod)[2]))
+  i <- i + 1
+} 
+
+```
+
+```{r plot2}
+ggplot(tecan_sets, aes(x = time, y = avg_A600)) +
+  geom_point(aes(shape = strain, color = strain)) +
+  geom_smooth(method = lm, se = FALSE, fullrange=TRUE, lwd = 0.5, aes(color = strain))+
+  labs(title = "Doubling Times from 24 hour Tecan Run in LB", 
+       x = "Time (sec)",
+       y = "Absorbance at 600nm") +
+  scale_colour_manual(name = "Strain",
+                      labels = c("1F1", "1F5", "1FH2", "CM1", "DH5A", "DRAD"),
+                      values = c("red", "salmon", "orange", "green","blue",  "violet")) +
+  scale_shape_manual(name = "Strain",
+                     labels = c("1F1", "1F5", "1FH2", "CM1", "DH5A", "DRAD"),
+                     values = c(0, 1, 2, 3, 4, 5, 6, 8))
+```
+
+
+
+
+
+
