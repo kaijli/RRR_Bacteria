@@ -18,6 +18,10 @@ streaks <- read_sheet(ss = url,
                      sheet = "Streaks")
 srl_dils <- read_sheet(ss = url,
                      sheet = "Serial_Dilutions")
+nming_dils <- read_sheet(ss = url,
+                     sheet = "Normalizing_Dilutions")
+nmed_dils <- read_sheet(ss = url,
+                     sheet = "Normalized_Dilutions")
 
 ```
 
@@ -80,7 +84,6 @@ sz_uv <- sz_uv %>%
 
 ggplot(sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   geom_boxplot() +
-  coord_flip() +
   labs(title = "Percent Survival of Strains in UV irradiation",
        y = "Log10 of Percent Survival")
 
@@ -113,7 +116,27 @@ t.test(x = fh2$CFU_0, y = fh2$CFU_60) #fh2
 
 
 ```{r}
-#grubbs test
-library(outliers)
-grubbs.test(AllMerged$ConcAir, type=20)
+
+```
+```{r normalized}
+sixtys_uv <- nmed_dils %>%
+  filter(Time == 60) %>%
+  group_by(Strain, Set) %>%
+  summarise(CFU_60 = mean(CFU_mL))
+
+zeros_uv <- nmed_dils %>%
+  filter('Time' == 0) %>%
+  group_by('Strain', 'Set') %>%
+  summarise(CFU_0 = mean('CFU_mL'))
+
+sz_uv <- left_join(zeros_uv, sixtys_uv)
+
+sz_uv <- sz_uv %>%
+  mutate(p_survival = 'CFU_60'/'CFU_0')
+
+ggplot(sz_uv, aes(x = 'Strain', y = log('p_survival'), color = 'Strain')) +
+  geom_boxplot() +
+  labs(title = "Percent Survival of Strains in UV irradiation",
+       y = "Log10 of Percent Survival")
+
 ```
