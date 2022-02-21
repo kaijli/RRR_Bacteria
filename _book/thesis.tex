@@ -113,12 +113,12 @@
   \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
 % To pass between YAML and LaTeX the dollar signs are added by CII
-\title{My Final College Paper}
-\author{Your R. Name}
+\title{Radioresistant Bacteria of the Reed Research Reactor}
+\author{Kaitlyn Li}
 % The month and year that you submit your FINAL draft TO THE LIBRARY (May or December)
-\date{May 20xx}
+\date{May 2022}
 \division{Mathematics and Natural Sciences}
-\advisor{Advisor F. Name}
+\advisor{Jay Mellies}
 \institution{Reed College}
 \degree{Bachelor of Arts}
 %If you have two advisors for some reason, you can use the following
@@ -126,7 +126,7 @@
 % End of CII addition
 
 %%% Remember to use the correct department!
-\department{Mathematics}
+\department{Biochemistry and Molecular Biology}
 % if you're writing a thesis in an interdisciplinary major,
 % uncomment the line below and change the text as appropriate.
 % check the Senior Handbook if unsure.
@@ -227,17 +227,79 @@ Second paragraph of abstract starts here.
 \chapter*{Introduction}\label{introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-Welcome to the \emph{R Markdown} thesis template. This template is based on (and in many places copied directly from) the Reed College LaTeX template, but hopefully it will provide a nicer interface for those that have never used TeX or LaTeX before. Using \emph{R Markdown} will also allow you to easily keep track of your analyses in \textbf{R} chunks of code, with the resulting plots and output included as well. The hope is this \emph{R Markdown} template gets you in the habit of doing reproducible research, which benefits you long-term as a researcher, but also will greatly help anyone that is trying to reproduce or build onto your results down the road.
+\hypertarget{significance}{%
+\section{Significance}\label{significance}}
 
-Hopefully, you won't have much of a learning period to go through and you will reap the benefits of a nicely formatted thesis. The use of LaTeX in combination with \emph{Markdown} is more consistent than the output of a word processor, much less prone to corruption or crashing, and the resulting file is smaller than a Word file. While you may have never had problems using Word in the past, your thesis is likely going to be about twice as large and complex as anything you've written before, taxing Word's capabilities. After working with \emph{Markdown} and \textbf{R} together for a few weeks, we are confident this will be your reporting style of choice going forward.
+From medicine to insect control, fire alarms to renewable energy, nuclear technology has essential uses across a multitude of industries. In 1911, a young student named George de Hevesy lived modestly in Manchester while studying naturally radioactive materials. When dining with his landlady on a regular basis, he suspected that some meals were prepared with leftovers from many meals before. To test this hypothesis, he sprinkled a small amount of radioactive material into the leftovers, and the next day, found them in his meal using a rudimentary radiation detector. Hevesy went on to win the 1943 Nobel Prize and 1959 Atoms for Peace. This tracing application of radioactive materials is now widely used in industrial, medical, and environmental sciences. (``The Many Uses of Nuclear Technology - World Nuclear Association,'' n.d.) But what about the health risks associated with radiation, one might ask?
 
-\textbf{Why use it?}
+Typically, when in close proximity to humans and health, nuclear technology tends to use substances with short half-lives. A half-life is the measurement of characteristic transformation over a period of time. For radioactive isotopes, this is a measurement of initial activity, where half of the initial is gone after the length of time specified as its half-life. (Cember, 1996) Radioactive iodine (I-123) has a half-life of 13 hours, so half of the original activity remains after 13 hours, then three-fourths after 26 hours, and seven-eights gone after 39 hours. This isotope of iodine is often a diagnostic tool for thyroid function, and the 13 hour half-life allows for it to decay quickly and no longer pose radiological dangers. (Iqbal \& Rehman, 2022) Longer living radioisotopes, such as most naturally occurring uranium (U-238) with a half-life of 4.5 billion years, are used in industries including low-carbon energy, water desalination, and food sterilization. (Cember, 1996)
+As with all industries, hazardous waste needs a place to go and a method of safe disposal. Currently, there are many ways to deal with radioactive waste, such used fuel reprocessing and geological disposal facilities for safe decay. There have been many public doubts to these methods, citing transportation risks, long-term hazards, and emergence in future generations. In transport, radioactive waste is contained within tonnes of radiation- and corrosion-resistant material (such as stainless steel and lead), and typically vitrified so that the waste is immobile, insoluble, and stable for long periods of time. This allows for the materials to decay to the levels at which they were mined, and prevents leakage of contaminants into the environment. Short-term storage and disposal works well for wastes with multiple year half-lives. However, some wastes may need tens to thousands of year before decaying to naturally-occurring activity, which leads to issues of security and accessibility as time passes. (``The Many Uses of Nuclear Technology - World Nuclear Association,'' n.d.)
 
-\emph{R Markdown} creates a simple and straightforward way to interface with the beauty of LaTeX. Packages have been written in \textbf{R} to work directly with LaTeX to produce nicely formatting tables and paragraphs. In addition to creating a user friendly interface to LaTeX, \emph{R Markdown} also allows you to read in your data, to analyze it and to visualize it using \textbf{R} functions, and also to provide the documentation and commentary on the results of your project. Further, it allows for \textbf{R} results to be passed inline to the commentary of your results. You'll see more on this later.
+Enter one of many solutions: the radioresistant microbe. Even in the most barren of places, bacteria can be found growing, maybe even thriving. If the world were explode and end, there would still probably be bacteria floating around just because they're so persistent. Thus, unsurprisingly, bacteria have been found in nuclear disaster sites such as Three Mile Island and Chernobyl. (Zhdanova, Tugay, Dighton, Zheltonozhsky, \& McDermott, 2004) Since initial considerations of radioresistant bacteria in industrial uses in 1996 (Binks, 1996), bacteria have been used to precipitate uranium contamination from groundwater (Cologgi, Lampa-Pastirk, Speers, Kelly, \& Reguera, 2011) and reduce the oxidation state of uranium for metal leeching uses (Koribanics et al., 2015). Using radioresistant bacteria, decay and disposal of radioactive waste can be fast-tracked, and thousand-year storage can be avoided.
 
-\textbf{Who should use it?}
+\hypertarget{radioresistant-spotlight}{%
+\section{Radioresistant Spotlight}\label{radioresistant-spotlight}}
 
-Anyone who needs to use data analysis, math, tables, a lot of figures, complex cross-references, or who just cares about the final appearance of their document should use \emph{R Markdown}. Of particular use should be anyone in the sciences, but the user-friendly nature of \emph{Markdown} and its ability to keep track of and easily include figures, automatically generate a table of contents, index, references, table of figures, etc. should make it of great benefit to nearly anyone writing a thesis project.
+So what is radioresistance? Radioresistance refers the level of ionizing radiation an organism can withstand. High levels of radioresistance are often found among insects, worms, plants, and certain extremophiles such as \emph{Deinococcus radiodurans} (D. rad) and tardigrades. To give a reference point, a lethal dose of radiation to humans is between 4-10 Grays, whereas D. rad can withstand up to 15,000 Grays. Of course, there's a lot more complexities to the human body than to the single celled bacteria, but that is still many magnitudes more radiation in comparison. {[}noauthor\_radiochemistry\_nodate{]}
+
+The biological effects of radiation have also been thoroughly studied since the atomic bombings in World War II. Scientists have found various different stochastic or deterministic effects, where a certain minimum dose of radiation is needed or the effect occur by chance, respectively. Radiation, ionization, and excitation can directly effect any part of the body, such as damaging specific protein molecules or nucleic acids. However, organisms mostly consist of water, so radiation directly mutating a single nucleic acid is rare. Instead, most radiation directly interacts with water, and the energy absorbed by the water creates highly reactive free radicals, which contain unpaired electrons (Figure \ref{fig:radiationDNA}). The unpaired electrons make free radicals highly reactive and chemically toxic to other molecules, in this case, other waters and free radicals. One possible chemical reaction is as follows:
+\begin{align*}
+  &\mathrm{H_{2}O} \longrightarrow \mathrm{H_{2}O^{+} + e^-}   \qquad \text{First water molecule is irradiated} \\
+  &\mathrm{H_{2}O^+} \longrightarrow \mathrm{H^{+} + OH}       \qquad \text{Positive ion dissociates} \\
+  &\mathrm{H_{2}O + e^-} \longrightarrow \mathrm{H_{2}O^-}     \qquad \text{Electron is picked up by water molecule} \\
+  &\mathrm{H_{2}O^-} \longrightarrow \mathrm{H + OH^-}         \qquad \text{Hydronium ion dissociates} \\
+  &\mathrm{OH + OH} \longrightarrow \mathrm{H_{2}O_{2}}        \qquad \text{Hydrogen peroxide is formed} 
+  \label{eq:reaction}
+\end{align*}
+The resulting hydrogen peroxide is a powerful oxidizing agent, and can thus affect molecules or cells that were not initially affected by radiation. While all organisms have some form of DNA or macromolecule repair mechanisms, most are not equipped for large scales of damage. Radiation damage is irreversible, so unless the damaged cells are quickly replaced by healthy ones, this can lead to the demise of organisms. (Cember, 1996)
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{figure/radiation_DNA} 
+
+}
+
+\caption{Interaction of radiation and DNA, adapted from Przystupski et al.}\label{fig:radiationDNA}
+\end{figure}
+In 1956, the discovery of D. rad as a contaminant in radiation-sterilized corned beef cans brought about DNA-centered molecular biology (Krisko \& Radman, 2013). Radiosensitivity varies between quiescent and slow dividing cells versus cells with high proliferation rates. Like with growth-arrested bacteria and antibiotics, quiescent and slow dividing cells are less radiosensitive. Growth-arrested bacteria inactivate antibiotic targets, allowing the cells to remain dormant until the threat has passed. In slow growing cells, DNA repair mechanisms have the time to repair damage many times more than in standard growing species, allowing them to make sure every new cell is well-made. For example, D. rad is just as radiosensitive as many other bacteria, but due to its investment in efficiency of survival over growth, not only does it present spectacular DNA repair capacity for radioresistance, but also resistance to desiccation (Krisko \& Radman, 2013). Other organisms studied for radioresistance include \emph{Escherichia coli} (\emph{E. coli}), a less radioresistant bacteria found to produce resistant mutants based on environmental conditions and physiological factors, and melanin rich fungus found at the Chernobyl disaster site better protected against UV, solar, and ionizing radiation than its less pigmented relatives (Witkin, 1946, p. @dadachova\_ionizing\_2007).
+
+But as with any antibacterial method, extremophiles will form. Highly radioresistant strains of bacteria have been generated and found many times in environmental and laboratory settings. (Bruckbauer \& Cox, 2021) In addition to that, there is also potential for microbial diversity induced by low levels of ionizing radiation to use as bioregenerative life support systems. (Yang, Li, Song, Xu, \& Hu, 2021) The study of these radioresistant bacteria and their robust cellular repair mechanisms are crucial for opening new doors in medicine, sustainability, and industry.
+
+\hypertarget{the-reed-research-reactor}{%
+\section{The Reed Research Reactor}\label{the-reed-research-reactor}}
+
+Let's make this more local. Welcome to Reed College, we have a cute little tourist point call the Reed Research Reactor (RRR). It's a Training, Research, Isotopes, General Atomics (TRIGA) Mark I reactor built in 1968 by General Atomics primarily used for research and education. We're proudly the only nuclear reactor in the world that is owned and run by an exclusively undergraduate college. On the scale of reactors, it's small, underfunded, but well loved by the staff and community. Operators are officially licensed by the Nuclear Regulatory Commission (NRC), but since we're a non-profit educational institution, we're paid minimum wage.
+
+Why do we have a reactor anyway? Reed does not have engineering as a major, much less nuclear engineering. Well you see, it all started with a murder. In 1934, Professor of Chemistry Ralph Kempton Strong left after accusations of murdering his wife arose, and Arthur F. Scott become a professor of chemistry at Reed in 1937. Scott's specialty was radiochemistry, and with the support from the Atomic Energy Commission (which has since been transformed into the NRC) eventually installed the reactor in 1968 {[}Ellis{]}. Since then, hundreds of students have been licensed, and hundreds of experiments have been conducted to their individual interests. Commonly mentioned experiments include irradiation of zebrafish, frog cells, fingernails, and archaeological artifacts to observe the effects of radiation on organism development and trace elements found in composite materials, respectively {[}gee\_effects\_2020{]}.
+
+Let's do a quick crash course on radiation and health physics. Sometimes, atomic nuclei find themselves in unstable configurations due to energy imbalances or particle interactions. This instability makes the atom radioactive, so to relax and stabilize, the nucleus undergoes a process to lose energy by ejecting smaller particles or rearranging the protons and neutrons. The smaller particles containing energy are called radiation, and the process is radioactive decay. There are three types of ionizing radiation: alpha, beta, and gamma. Alpha particles are essentially a helium atom without electrons, composed of two protons and two neutrons. It's the heaviest of the three molecules, so it won't travel very far but will do a lot of damage if it gets to an unprotected area. This type of radiation is easiest to shield against---even the dead layer of cells covering your skin will do. Beta particles are similar to electrons, but ejected from the nucleus of an atom to turn a proton into a neutron, or absorbed to do the opposite. It's much lighter than the alpha particle, and can travel a little further, and need low atomic mass materials such as several inches of wood, plastic, or a sheet of aluminum foil to stop them. Lastly, gamma radiation is pure energy, completely mass-less. It can easily make its way through materials and needs a good amount of lead or concrete to shield it. Outside of ionizing radiation is neutron radiation. These particles don't ionize other atoms, instead the target can be made radioactive through a process called neutron activation to release one of three above ionizing radiations. Due to their neutral charge and lack of ionizing capabilities, neutrons are difficult to directly detect using typical hand-held radiation detectors such as Gieger-Mullers, and instead need various calculations or different instruments to accurately measure. To protect ourselves from them, we need three layers: one to slow it down (water), one to absorb it (boron), and one to shield from the resulting gammas released (concrete).
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{figure/types of radiation} 
+
+}
+
+\caption{Interaction of radiation and DNA, reprinted from American Nuclear Society.}\label{fig:typesOfRadiation}
+\end{figure}
+Why do we even want to shield ourselves from radiation? Atoms make up everything, so when the stability of an atom is disrupted, it can be like pulling the wrong piece out of a precariously balanced stack of blocks. In your body, the ionization radiation interacts mostly with water, which results in an unpaired election called free radical. This free radical is extremely reactive, so the slightly negatively charged water molecule will try to interact with anything it's close to, and since the body is 70\% water, there will be a lot of free radicals to mess with the status quo as mentioned previously. Tucked behind both a cell and nucleus membranes in eukaryotic cells is the vital molecule, deoxynucleic acid (DNA). DNA is the first component to the central dogma of biology, where it acts as the blueprint for the production of all other things---from proteins, to cells, tissue, organs, and organisms. Ionizing radiation and its results can destabilize membranes and the charged particles will interact with the DNA, causing base and sugar damage, single stranded breaks, and double stranded breaks. Double stranded breaks are often the most lethal, as chromosomal rearrangement can occur, repair is slow, and cell death or delayed mitosis can result. While there are many cell mechanisms that exist to repair these dangers, there can be too much damage and not enough time to effectively save the cell and its progeny.
+
+Oh no, radiation sounds so scary! If I'm irradiated, can I turn into a non-trademarked superhero? Absolutely not. You might just die. Also, radiation is all around you! It's constantly emitted from sources such as the sun, the air, the ground, building materials, and even your food (Shahbazi-Gahrouei, Gholami, \& Setayandeh, 2013). A higher dose of radiation is receive on an airplane ride than the dose received while working at the reactor for the same amount of time. There is no escape.
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{figure/daily radiation} 
+
+}
+
+\caption{Interaction of radiation and DNA, reprinted from Ministry of the Environment, Government of Japan}\label{fig:dailyRadiation}
+\end{figure}
+\hypertarget{so-what-am-i-doing-here}{%
+\section{So what am I doing here?}\label{so-what-am-i-doing-here}}
+
+Well. The RRR core is situated in a 25000 gallon tank of filtered, demineralized water for optimal clarity and shielding for the various types of radiation. So with all the filtration and radiation, the reactor water should be pretty clean\ldots{} right?
+Remember those extremophiles? Bacteria can survive off of just about anything, so even though there may not be explicit food for them in the water, there's plenty of materials that make up the reactor system itself. A study performed at the Three Mile Island nuclear power plant and the spent nuclear fuel pools of the Cofrentes nuclear power plant in Valencia, Spain, observed microbial growth living in ultra-pure, radioactive water. The nuclear industry started to devote attention to microbiological influenced corrosion of surfaces, but due to the belief that gamma radiation from the reactor fuel would effectively sterilize environments, the studies have been all but forgotten (Chicote et al., 2005).
+
+Inspired by Radioresistant microbes in the Reed Research Reactor (D. Dashevsky, Microbiology Lab Poster, Reed College, 2014), a short study by former microbiology student and reactor operator Daniel Dashevsky, we will isolate and identify bacteria from the primary filtration system of the Reed Research Reactor. In their project, Dashevsky isolated \emph{Pseudomonas fluorescens} (\emph{P. fluorescens}) from the reactor systems that demonstrated radioresistance. In Spring of 2021, samples were collected from various parts of the Reed Research Reactor (RRR) primary filtration system using sterile swabs and nutrient agar plates. Sampling areas included the primary filter and housing, the pool floor, the pool walls, poolside fuel racks, and the top of the core. While many strains of bacteria were isolated from the initial sampling of the RRR primary filtration system, only 5 strains from the primary filter (1°F1 - 5) were used for the irradiation in addition to the three controls: Dra, the radioresistant positive control; DDev, the RRR isolated radioresistant positive control; \emph{Escherichia coli} ( \emph{E. coli} ) DH5-\(\alpha\), the radiosensitive negative control. Overnight growths of these exposed to a dose of 877 µGy using a Cesium-137 source {[}insert activity{]} plated to observe differences in growth between irradiated and non-irradiated samples.
+
+The result of this preliminary study reveal the potential of these bacteria and the RRR experimental systems to research radioresistant microorganisms. While the conclusions drawn from the study themselves do not reveal much, it allowed for experimental methods to be developed and refined for this thesis. In continuing the work, I have since found 3 strains of radioresistance \emph{Bacillus} species through UV irradiation and 16S analysis. Using the experimental facilities of the RRR, I hope to test and observe the hypothesis that the strains of radioresistant bacteria I find will contain robust DNA repair genes compared to standard lab strains to explain the basis of their radioresistance.
 
 \textbf{For additional help with bookdown}
 
@@ -308,11 +370,6 @@ This should be a new paragraph.
 \section{R chunks}\label{r-chunks}}
 
 When you click the \textbf{Knit} button above a document will be generated that includes both content as well as the output of any embedded \textbf{R} code chunks within the document. You can embed an \textbf{R} code chunk like this (\texttt{cars} is a built-in \textbf{R} dataset):
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(cars)}
-\end{Highlighting}
-\end{Shaded}
 \begin{verbatim}
      speed           dist       
  Min.   : 4.0   Min.   :  2.00  
@@ -358,28 +415,11 @@ Another useful chunk option is the setting of \texttt{cache=TRUE} as you see her
 Included in this template is a file called \texttt{flights.csv}. This file includes a subset of the larger dataset of information about all flights that departed from Seattle and Portland in 2014. More information about this dataset and its \textbf{R} package is available at \url{https://github.com/ismayc/pnwflights14}. This subset includes only Portland flights and only rows that were complete with no missing values. Merges were also done with the \texttt{airports} and \texttt{airlines} data sets in the \texttt{pnwflights14} package to get more descriptive airport and airline names.
 
 We can load in this data set using the following commands:
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# flights.csv is in the data directory}
-\NormalTok{flights_path <-}\StringTok{ }\NormalTok{here}\OperatorTok{::}\KeywordTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"flights.csv"}\NormalTok{)}
-\CommentTok{# string columns will be read in as strings and not factors now}
-\NormalTok{flights <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(flights_path, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+
 The data is now stored in the data frame called \texttt{flights} in \textbf{R}. To get a better feel for the variables included in this dataset we can use a variety of functions. Here we can see the dimensions (rows by columns) and also the names of the columns.
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(flights)}
-\end{Highlighting}
-\end{Shaded}
 \begin{verbatim}
 [1] 12649    16
 \end{verbatim}
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(flights)}
-\end{Highlighting}
-\end{Shaded}
 \begin{verbatim}
  [1] "month"        "day"          "dep_time"     "dep_delay"   
  [5] "arr_time"     "arr_delay"    "carrier"      "tailnum"     
@@ -387,33 +427,11 @@ The data is now stored in the data frame called \texttt{flights} in \textbf{R}. 
 [13] "hour"         "minute"       "carrier_name" "dest_name"   
 \end{verbatim}
 Another good idea is to take a look at the dataset in table form. With this dataset having more than 20,000 rows, we won't explicitly show the results of the command here. I recommend you enter the command into the Console \textbf{\emph{after}} you have run the \textbf{R} chunks above to load the data into \textbf{R}.
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{View}\NormalTok{(flights)}
-\end{Highlighting}
-\end{Shaded}
+
 While not required, it is highly recommended you use the \texttt{dplyr} package to manipulate and summarize your data set as needed. It uses a syntax that is easy to understand using chaining operations. Below I've created a few examples of using \texttt{dplyr} to get information about the Portland flights in 2014. You will also see the use of the \texttt{ggplot2} package, which produces beautiful, high-quality academic visuals.
 
 We begin by checking to ensure that needed packages are installed and then we load them into our current working environment:
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# List of packages required for this analysis}
-\NormalTok{pkg <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"knitr"}\NormalTok{, }\StringTok{"bookdown"}\NormalTok{)}
-\CommentTok{# Check if packages are not installed and assign the}
-\CommentTok{# names of the packages not installed to the variable new.pkg}
-\NormalTok{new.pkg <-}\StringTok{ }\NormalTok{pkg[}\OperatorTok{!}\NormalTok{(pkg }\OperatorTok{%in%}\StringTok{ }\KeywordTok{installed.packages}\NormalTok{())]}
-\CommentTok{# If there are any packages in the list that aren't installed,}
-\CommentTok{# install them}
-\ControlFlowTok{if}\NormalTok{ (}\KeywordTok{length}\NormalTok{(new.pkg)) \{}
-  \KeywordTok{install.packages}\NormalTok{(new.pkg, }\DataTypeTok{repos =} \StringTok{"https://cran.rstudio.com"}\NormalTok{)}
-\NormalTok{\}}
-\CommentTok{# Load packages}
-\KeywordTok{library}\NormalTok{(thesisdown)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(knitr)}
-\end{Highlighting}
-\end{Shaded}
+
 \clearpage
 
 The example we show here does the following:
@@ -423,27 +441,7 @@ The example we show here does the following:
 \item
   Using \texttt{flights2}, we determine the largest arrival delay for each of the carriers.
 \end{itemize}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{flights2 <-}\StringTok{ }\NormalTok{flights }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(carrier_name, arr_delay)}
-\NormalTok{max_delays <-}\StringTok{ }\NormalTok{flights2 }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(carrier_name) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{max_arr_delay =} \KeywordTok{max}\NormalTok{(arr_delay, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 A useful function in the \texttt{knitr} package for making nice tables in \emph{R Markdown} is called \texttt{kable}. It is much easier to use than manually entering values into a table by copying and pasting values into Excel or LaTeX. This again goes to show how nice reproducible documents can be! (Note the use of \texttt{results="asis"}, which will produce the table instead of the code to create the table.) The \texttt{caption.short} argument is used to include a shorter title to appear in the List of Tables.
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{kable}\NormalTok{(max_delays,}
-  \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Airline"}\NormalTok{, }\StringTok{"Max Arrival Delay"}\NormalTok{),}
-  \DataTypeTok{caption =} \StringTok{"Maximum Delays by Airline"}\NormalTok{,}
-  \DataTypeTok{caption.short =} \StringTok{"Max Delays by Airline"}\NormalTok{,}
-  \DataTypeTok{longtable =} \OtherTok{TRUE}\NormalTok{,}
-  \DataTypeTok{booktabs =} \OtherTok{TRUE}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 \begin{longtable}[t]{lr}
 \caption[Max Delays by Airline]{\label{tab:maxdelays}Maximum Delays by Airline}\\
 \toprule
@@ -467,32 +465,12 @@ Virgin America & 366\\
 The last two options make the table a little easier-to-read.
 
 We can further look into the properties of the largest value here for American Airlines Inc.~To do so, we can isolate the row corresponding to the arrival delay of 1539 minutes for American in our original \texttt{flights} dataset.
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{flights }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}
-\NormalTok{    arr_delay }\OperatorTok{==}\StringTok{ }\DecValTok{1539}\NormalTok{,}
-\NormalTok{    carrier_name }\OperatorTok{==}\StringTok{ "American Airlines Inc."}
-\NormalTok{  ) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}
-\NormalTok{    month, day, carrier, dest_name, hour,}
-\NormalTok{    minute, carrier_name, arr_delay}
-\NormalTok{  ))}
-\end{Highlighting}
-\end{Shaded}
 \begin{verbatim}
   dep_time dep_delay arr_time tailnum flight dest air_time distance
 1     1403      1553     1934  N595AA   1568  DFW      182     1616
 \end{verbatim}
 We see that the flight occurred on March 3rd and departed a little after 2 PM on its way to Dallas/Fort Worth. Lastly, we show how we can visualize the arrival delay of all departing flights from Portland on March 3rd against time of departure.
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{flights }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{filter}\NormalTok{(month }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{, day }\OperatorTok{==}\StringTok{ }\DecValTok{3}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ dep_time, }\DataTypeTok{y =}\NormalTok{ arr_delay)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
+
 \includegraphics{thesis_files/figure-latex/march3plot-1.pdf}
 
 \hypertarget{additional-resources}{%
@@ -599,11 +577,6 @@ You will probably find the resources at \url{https://www.lecb.ncifcrf.gov/~toms/
 If your thesis has a lot of figures, \emph{R Markdown} might behave better for you than that other word processor. One perk is that it will automatically number the figures accordingly in each chapter. You'll also be able to create a label for each figure, add a caption, and then reference the figure in a way similar to what we saw with tables earlier. If you label your figures, you can move the figures around and \emph{R Markdown} will automatically adjust the numbering for you. No need for you to remember! So that you don't have to get too far into LaTeX to do this, a couple \textbf{R} functions have been created for you to assist. You'll see their use below.
 
 In the \textbf{R} chunk below, we will load in a picture stored as \texttt{reed.jpg} in our main directory. We then give it the caption of ``Reed logo'', the label of ``reedlogo'', and specify that this is a figure. Make note of the different \textbf{R} chunk options that are given in the R Markdown file (not shown in the knitted document).
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{include_graphics}\NormalTok{(}\DataTypeTok{path =} \StringTok{"figure/reed.jpg"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 \begin{figure}
 
 {\centering \includegraphics[width=0.2\linewidth]{figure/reed} 
@@ -617,15 +590,6 @@ Here is a reference to the Reed logo: Figure \ref{fig:reedlogo}. Note the use of
 \clearpage
 
 Below we will investigate how to save the output of an \textbf{R} plot and label it in a way similar to that done above. Recall the \texttt{flights} dataset from Chapter \ref{rmd-basics}. (Note that we've shown a different way to reference a section or chapter here.) We will next explore a bar graph with the mean flight departure delays by airline from Portland for 2014.
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mean_delay_by_carrier <-}\StringTok{ }\NormalTok{flights }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(carrier) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{mean_dep_delay =} \KeywordTok{mean}\NormalTok{(dep_delay))}
-\KeywordTok{ggplot}\NormalTok{(mean_delay_by_carrier, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ carrier, }\DataTypeTok{y =}\NormalTok{ mean_dep_delay)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{position =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{fill =} \StringTok{"red"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 \begin{figure}
 \centering
 \includegraphics{thesis_files/figure-latex/delaysboxplot-1.pdf}
@@ -710,6 +674,7 @@ This first appendix includes all of the R chunks of code that were hidden throug
 \textbf{In the main Rmd file}
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{knitr}\OperatorTok{::}\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{echo =} \OtherTok{FALSE}\NormalTok{)}
 \CommentTok{# This chunk ensures that the thesisdown package is}
 \CommentTok{# installed and loaded. This thesisdown package includes}
 \CommentTok{# the template files for the thesis.}
@@ -720,6 +685,42 @@ This first appendix includes all of the R chunks of code that were hidden throug
     \KeywordTok{stop}\NormalTok{(}
       \KeywordTok{paste}\NormalTok{(}\StringTok{'You need to run install.packages("remotes")",}
 \StringTok{            "first in the Console.'}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{  \}}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{require}\NormalTok{(dplyr)) \{}
+  \ControlFlowTok{if}\NormalTok{ (params}\OperatorTok{$}\StringTok{`}\DataTypeTok{Install needed packages for \{thesisdown\}}\StringTok{`}\NormalTok{) \{}
+    \KeywordTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://cran.rstudio.com"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{stop}\NormalTok{(}
+      \KeywordTok{paste}\NormalTok{(}
+        \StringTok{'You need to run install.packages("dplyr")'}\NormalTok{,}
+        \StringTok{"first in the Console."}
+\NormalTok{      )}
+\NormalTok{    )}
+\NormalTok{  \}}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2)) \{}
+  \ControlFlowTok{if}\NormalTok{ (params}\OperatorTok{$}\StringTok{`}\DataTypeTok{Install needed packages for \{thesisdown\}}\StringTok{`}\NormalTok{) \{}
+    \KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://cran.rstudio.com"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{stop}\NormalTok{(}
+      \KeywordTok{paste}\NormalTok{(}
+        \StringTok{'You need to run install.packages("ggplot2")'}\NormalTok{,}
+        \StringTok{"first in the Console."}
+\NormalTok{      )}
+\NormalTok{    )}
+\NormalTok{  \}}
+\NormalTok{\}}
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{require}\NormalTok{(bookdown)) \{}
+  \ControlFlowTok{if}\NormalTok{ (params}\OperatorTok{$}\StringTok{`}\DataTypeTok{Install needed packages for \{thesisdown\}}\StringTok{`}\NormalTok{) \{}
+    \KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://cran.rstudio.com"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \KeywordTok{stop}\NormalTok{(}
+      \KeywordTok{paste}\NormalTok{(}
+        \StringTok{'You need to run install.packages("bookdown")'}\NormalTok{,}
+        \StringTok{"first in the Console."}
+\NormalTok{      )}
 \NormalTok{    )}
 \NormalTok{  \}}
 \NormalTok{\}}
@@ -736,7 +737,12 @@ This first appendix includes all of the R chunks of code that were hidden throug
 \NormalTok{    )}
 \NormalTok{  \}}
 \NormalTok{\}}
+
 \KeywordTok{library}\NormalTok{(thesisdown)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(knitr)}
+\KeywordTok{library}\NormalTok{(graphics)}
 \CommentTok{# Set how wide the R output will go}
 \KeywordTok{options}\NormalTok{(}\DataTypeTok{width =} \DecValTok{70}\NormalTok{)}
 \end{Highlighting}
@@ -841,6 +847,33 @@ Angel, E. (2001a). \emph{Batch-file computer graphics : A bottom-up approach wit
 \leavevmode\hypertarget{ref-angel2002a}{}%
 Angel, E. (2001b). \emph{Test second book by angel}. Boston, MA: Wesley Addison Longman.
 
+\leavevmode\hypertarget{ref-binks_radioresistant_1996}{}%
+Binks, P. R. (1996). Radioresistant bacteria: Have they got industrial uses? \emph{Journal of Chemical Technology \& Biotechnology}, \emph{67}(4), 319--322. \url{http://doi.org/https://doi.org/10.1002/(SICI)1097-4660(199612)67:4\%3C319::AID-JCTB582\%3E3.0.CO;2-G}
+
+\leavevmode\hypertarget{ref-bruckbauer_experimental_2021}{}%
+Bruckbauer, S. T., \& Cox, M. M. (2021). Experimental evolution of extremophile resistance to ionizing radiation. \emph{Trends in Genetics}, \emph{37}(9), 830--845. \url{http://doi.org/10.1016/j.tig.2021.04.011}
+
+\leavevmode\hypertarget{ref-cember_introduction_1996}{}%
+Cember, H. (1996). \emph{Introduction to Health Physics} (3rd edition). New York: McGraw-Hill Medical.
+
+\leavevmode\hypertarget{ref-chicote_isolation_2005}{}%
+Chicote, E., García, A. M., Moreno, D. A., Sarró, M. I., Lorenzo, P. I., \& Montero, F. (2005). Isolation and identification of bacteria from spent nuclear fuel pools. \emph{Journal of Industrial Microbiology and Biotechnology}, \emph{32}(4), 155--162. \url{http://doi.org/10.1007/s10295-005-0216-3}
+
+\leavevmode\hypertarget{ref-cologgi_extracellular_2011}{}%
+Cologgi, D. L., Lampa-Pastirk, S., Speers, A. M., Kelly, S. D., \& Reguera, G. (2011). Extracellular reduction of uranium via Geobacter conductive pili as a protective cellular mechanism. \emph{Proceedings of the National Academy of Sciences}, \emph{108}(37), 15248--15252. \url{http://doi.org/10.1073/pnas.1108616108}
+
+\leavevmode\hypertarget{ref-dadachova_ionizing_2007}{}%
+Dadachova, E., Bryan, R. A., Huang, X., Moadel, T., Schweitzer, A. D., Aisen, P., \ldots{} Casadevall, A. (2007). Ionizing Radiation Changes the Electronic Properties of Melanin and Enhances the Growth of Melanized Fungi. \emph{PLOS ONE}, \emph{2}(5), e457. \url{http://doi.org/10.1371/journal.pone.0000457}
+
+\leavevmode\hypertarget{ref-iqbal_thyroid_2022}{}%
+Iqbal, A., \& Rehman, A. (2022). Thyroid Uptake and Scan. In \emph{StatPearls}. Treasure Island (FL): StatPearls Publishing. Retrieved from \url{http://www.ncbi.nlm.nih.gov/books/NBK555978/}
+
+\leavevmode\hypertarget{ref-koribanics_spatial_2015}{}%
+Koribanics, N. M., Tuorto, S. J., Lopez-Chiaffarelli, N., McGuinness, L. R., Häggblom, M. M., Williams, K. H., \ldots{} Kerkhof, L. J. (2015). Spatial Distribution of an Uranium-Respiring Betaproteobacterium at the Rifle, CO Field Research Site. \emph{PLoS ONE}, \emph{10}(4), e0123378. \url{http://doi.org/10.1371/journal.pone.0123378}
+
+\leavevmode\hypertarget{ref-krisko_biology_2013}{}%
+Krisko, A., \& Radman, M. (2013). Biology of Extreme Radiation Resistance: The Way of Deinococcus radiodurans. \emph{Cold Spring Harbor Perspectives in Biology}, \emph{5}(7). \url{http://doi.org/10.1101/cshperspect.a012765}
+
 \leavevmode\hypertarget{ref-Molina1994}{}%
 Molina, S. T., \& Borkovec, T. D. (1994). The Penn State worry questionnaire: Psychometric properties and associated characteristics. In G. C. L. Davey \& F. Tallis (Eds.), \emph{Worrying: Perspectives on theory, assessment and treatment} (pp. 265--283). New York: Wiley.
 
@@ -849,6 +882,21 @@ Noble, S. G. (2002). \emph{Turning images into simple line-art} (Undergraduate t
 
 \leavevmode\hypertarget{ref-reedweb2007}{}%
 Reed~College. (2007). LaTeX your document. Retrieved from \url{https://web.reed.edu/cis/help/LaTeX/index.html}
+
+\leavevmode\hypertarget{ref-shahbazi-gahrouei_review_2013}{}%
+Shahbazi-Gahrouei, D., Gholami, M., \& Setayandeh, S. (2013). A review on natural background radiation. \emph{Advanced Biomedical Research}, \emph{2}, 65. \url{http://doi.org/10.4103/2277-9175.115821}
+
+\leavevmode\hypertarget{ref-noauthor_many_nodate}{}%
+The Many Uses of Nuclear Technology - World Nuclear Association. (n.d.). Retrieved from \url{https://world-nuclear.org/information-library/non-power-nuclear-applications/overview/the-many-uses-of-nuclear-technology.aspx}
+
+\leavevmode\hypertarget{ref-witkin_inherited_1946}{}%
+Witkin, E. M. (1946). Inherited Differences in Sensitivity to Radiation in Escherichia coli. \emph{Proceedings of the National Academy of Sciences of the United States of America}, \emph{32}(3), 59--68. Retrieved from \url{https://www.jstor.org/stable/87923}
+
+\leavevmode\hypertarget{ref-yang_microbial_2021}{}%
+Yang, X., Li, S., Song, G., Xu, X., \& Hu, D. (2021). Microbial diversity formed and maintained through substrate feedback regulation and delayed responses induced by Low-Dose Ionizing Radiation. \emph{Acta Astronautica}, \emph{188}, 239--251. \url{http://doi.org/10.1016/j.actaastro.2021.07.027}
+
+\leavevmode\hypertarget{ref-zhdanova_ionizing_2004}{}%
+Zhdanova, N. N., Tugay, T., Dighton, J., Zheltonozhsky, V., \& McDermott, P. (2004). Ionizing radiation attracts soil fungi. \emph{Mycological Research}, \emph{108}(Pt 9), 1089--1096. \url{http://doi.org/10.1017/s0953756204000966}
 
 
 % Index?

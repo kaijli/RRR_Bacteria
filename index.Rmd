@@ -1,13 +1,13 @@
 ---
-title: 'My Final College Paper'
-author: 'Your R. Name'
-date: 'May 20xx'
+title: 'Radioresistant Bacteria of the Reed Research Reactor'
+author: 'Kaitlyn Li'
+date: 'May 2022'
 institution: 'Reed College'
 division: 'Mathematics and Natural Sciences'
-advisor: 'Advisor F. Name'
+advisor: 'Jay Mellies'
 # If you have more two advisors, un-silence line 7
 #altadvisor: 'Your Other Advisor'
-department: 'Mathematics'
+department: 'Biochemistry and Molecular Biology'
 degree: 'Bachelor of Arts'
 knit: bookdown::render_book
 site: bookdown::bookdown_site
@@ -47,7 +47,7 @@ preface: |
   (for LaTeX) and the R bookdown package, in general.
   
 # Specify the location of the bibliography below
-bibliography: bib/thesis.bib
+bibliography: bib/d2I1.bib
 # Download your specific csl file and refer to it in the line below.
 csl: csl/apa.csl
 lot: true
@@ -56,6 +56,7 @@ lof: true
 
 
 ```{r include_packages, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes
 # the template files for the thesis.
@@ -66,6 +67,42 @@ if (!require(remotes)) {
     stop(
       paste('You need to run install.packages("remotes")",
             "first in the Console.')
+    )
+  }
+}
+if (!require(dplyr)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("dplyr", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste(
+        'You need to run install.packages("dplyr")',
+        "first in the Console."
+      )
+    )
+  }
+}
+if (!require(ggplot2)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("ggplot2", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste(
+        'You need to run install.packages("ggplot2")',
+        "first in the Console."
+      )
+    )
+  }
+}
+if (!require(bookdown)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("bookdown", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste(
+        'You need to run install.packages("bookdown")',
+        "first in the Console."
+      )
     )
   }
 }
@@ -82,7 +119,12 @@ if (!require(thesisdown)) {
     )
   }
 }
+
 library(thesisdown)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(graphics)
 # Set how wide the R output will go
 options(width = 70)
 ```
@@ -93,8 +135,6 @@ version automatically by inputting them in the YAML at the top of this file.
 Alternatively, you can put that content in files like 00--prelim.Rmd and
 00-abstract.Rmd like done below.
 -->
-
-
 
 ```{r eval=!knitr::is_latex_output(), child=here::here("prelims", "00--prelim.Rmd")}
 
@@ -107,7 +147,7 @@ Alternatively, you can put that content in files like 00--prelim.Rmd and
 <!-- The {.unnumbered} option here means that the introduction will be 
 "Chapter 0." You can also use {-} for no numbers on chapters.
 -->
-
+ 
 # Introduction {.unnumbered}
 
 ## Significance
@@ -124,23 +164,25 @@ So what is radioresistance? Radioresistance refers the level of ionizing radiati
 
 The biological effects of radiation have also been thoroughly studied since the atomic bombings in World War II. Scientists have found various different stochastic or deterministic effects, where a certain minimum dose of radiation is needed or the effect occur by chance, respectively. Radiation, ionization, and excitation can directly effect any part of the body, such as damaging specific protein molecules or nucleic acids. However, organisms mostly consist of water, so radiation directly mutating a single nucleic acid is rare. Instead, most radiation directly interacts with water, and the energy absorbed by the water creates highly reactive free radicals, which contain unpaired electrons (Figure \@ref(fig:radiationDNA)). The unpaired electrons make free radicals highly reactive and chemically toxic to other molecules, in this case, other waters and free radicals. One possible chemical reaction is as follows:
 
-\begin{equation}
-  \mathrm{H_{2}O} \longrightarrow \mathrm{H_{2}O^{+} + e^{-} \tab \textnormal{First water molecule is irradiated}
-  \mathrm{H_{2}O^+} \longrightarrow \mathrm{H^{+} + OH \tab \textnormal{Positive ion dissociates}
-  \mathrm{H_{2}O + e^{-}} \longrightarrow \mathrm{H_{2}O^{-} \tab \textnormal{Electron is picked up by water molecule}
-  \mathrm{H_{2}O^-} \longrightarrow \mathrm{H + OH^{-} \tab \textnormal{Hydronium ion dissociates}
-  \mathrm{OH + OH} \longrightarrow \mathrm{H_{2}O_{2} \tab \textnormal{Hydrogen peroxide is formed}
+\begin{align*}
+  &\mathrm{H_{2}O} \longrightarrow \mathrm{H_{2}O^{+} + e^-}   \qquad \text{First water molecule is irradiated} \\
+  &\mathrm{H_{2}O^+} \longrightarrow \mathrm{H^{+} + OH}       \qquad \text{Positive ion dissociates} \\
+  &\mathrm{H_{2}O + e^-} \longrightarrow \mathrm{H_{2}O^-}     \qquad \text{Electron is picked up by water molecule} \\
+  &\mathrm{H_{2}O^-} \longrightarrow \mathrm{H + OH^-}         \qquad \text{Hydronium ion dissociates} \\
+  &\mathrm{OH + OH} \longrightarrow \mathrm{H_{2}O_{2}}        \qquad \text{Hydrogen peroxide is formed} 
   (\#eq:reaction)
-\end{equation}
+\end{align*}
 
 
 The resulting hydrogen peroxide is a powerful oxidizing agent, and can thus affect molecules or cells that were not initially affected by radiation. While all organisms have some form of DNA or macromolecule repair mechanisms, most are not equipped for large scales of damage. Radiation damage is irreversible, so unless the damaged cells are quickly replaced by healthy ones, this can lead to the demise of organisms. [@cember_introduction_1996] 
 
 
-```{r radiationDNA, fig.cap="Interaction of radiation and DNA, adapted from Przystupski et al. [@przystupski_cytoprotective_2019]", fig.align="center"}
-include_graphics(path = "figure/fphar-10-00851-g001.png")
+```{r radiationDNA, out.width = '100%', fig.align='center', fig.cap='Interaction of radiation and DNA, adapted from Przystupski et al.'}
+include_graphics("figure/radiation_DNA.png")
 ```
+
 In 1956, the discovery of D. rad as a contaminant in radiation-sterilized corned beef cans brought about DNA-centered molecular biology [@krisko_biology_2013]. Radiosensitivity varies between quiescent and slow dividing cells versus cells with high proliferation rates. Like with growth-arrested bacteria and antibiotics, quiescent and slow dividing cells are less radiosensitive. Growth-arrested bacteria inactivate antibiotic targets, allowing the cells to remain dormant until the threat has passed. In slow growing cells, DNA repair mechanisms have the time to repair damage many times more than in standard growing species, allowing them to make sure every new cell is well-made. For example, D. rad is just as radiosensitive as many other bacteria, but due to its investment in efficiency of survival over growth, not only does it present spectacular DNA repair capacity for radioresistance, but also resistance to desiccation [@krisko_biology_2013]. Other organisms studied for radioresistance include _Escherichia coli_ (_E. coli_), a less radioresistant bacteria found to produce resistant mutants based on environmental conditions and physiological factors, and melanin rich fungus found at the Chernobyl disaster site better protected against UV, solar, and ionizing radiation than its less pigmented relatives [@witkin_inherited_1946, @dadachova_ionizing_2007]. 
+
 But as with any antibacterial method, extremophiles will form. Highly radioresistant strains of bacteria have been generated and found many times in environmental and laboratory settings. [@bruckbauer_experimental_2021] In addition to that, there is also potential for microbial diversity induced by low levels of ionizing radiation to use as bioregenerative life support systems. [@yang_microbial_2021]  The study of these radioresistant bacteria and their robust cellular repair mechanisms are crucial for opening new doors in medicine, sustainability, and industry. 
 
 ## The Reed Research Reactor
@@ -151,16 +193,16 @@ Why do we have a reactor anyway? Reed does not have engineering as a major, much
 
 Let’s do a quick crash course on radiation and health physics. Sometimes, atomic nuclei find themselves in unstable configurations due to energy imbalances or particle interactions. This instability makes the atom radioactive, so to relax and stabilize, the nucleus undergoes a process to lose energy by ejecting smaller particles or rearranging the protons and neutrons. The smaller particles containing energy are called radiation, and the process is radioactive decay. There are three types of ionizing radiation: alpha, beta, and gamma. Alpha particles are essentially a helium atom without electrons, composed of two protons and two neutrons. It’s the heaviest of the three molecules, so it won’t travel very far but will do a lot of damage if it gets to an unprotected area. This type of radiation is easiest to shield against—even the dead layer of cells covering your skin will do. Beta particles are similar to electrons, but ejected from the nucleus of an atom to turn a proton into a neutron, or absorbed to do the opposite. It’s much lighter than the alpha particle, and can travel a little further, and need low atomic mass materials such as several inches of wood, plastic, or a sheet of aluminum foil to stop them. Lastly, gamma radiation is pure energy, completely mass-less. It can easily make its way through materials and needs a good amount of lead or concrete to shield it. Outside of ionizing radiation is neutron radiation. These particles don’t ionize other atoms, instead the target can be made radioactive through a process called neutron activation to release one of three above ionizing radiations. Due to their neutral charge and lack of ionizing capabilities, neutrons are difficult to directly detect using typical hand-held radiation detectors such as Gieger-Mullers, and instead need various calculations or different instruments to accurately measure. To protect ourselves from them, we need three layers: one to slow it down (water), one to absorb it (boron), and one to shield from the resulting gammas released (concrete).
 
-```{r typesOfRadiation, fig.cap="Interaction of radiation and DNA, reprinted from American Nuclear Society [@noauthor_radiation_nodate]", fig.align="center"}
-include_graphics(path = "figure/types of radiation.svg")
+```{r typesOfRadiation, fig.cap = 'Interaction of radiation and DNA, reprinted from American Nuclear Society.', out.width = '100%', fig.align='center'}
+include_graphics("figure/types of radiation.png")
 ```
 
 Why do we even want to shield ourselves from radiation? Atoms make up everything, so when the stability of an atom is disrupted, it can be like pulling the wrong piece out of a precariously balanced stack of blocks. In your body, the ionization radiation interacts mostly with water, which results in an unpaired election called free radical. This free radical is extremely reactive, so the slightly negatively charged water molecule will try to interact with anything it’s close to, and since the body is 70% water, there will be a lot of free radicals to mess with the status quo as mentioned previously. Tucked behind both a cell and nucleus membranes in eukaryotic cells is the vital molecule, deoxynucleic acid (DNA). DNA is the first component to the central dogma of biology, where it acts as the blueprint for the production of all other things—from proteins, to cells, tissue, organs, and organisms. Ionizing radiation and its results can destabilize membranes and the charged particles will interact with the DNA, causing base and sugar damage, single stranded breaks, and double stranded breaks. Double stranded breaks are often the most lethal, as chromosomal rearrangement can occur, repair is slow, and cell death or delayed mitosis can result. While there are many cell mechanisms that exist to repair these dangers, there can be too much damage and not enough time to effectively save the cell and its progeny. 
 
 Oh no, radiation sounds so scary! If I’m irradiated, can I turn into a non-trademarked superhero? Absolutely not. You might just die. Also, radiation is all around you! It’s constantly emitted from sources such as the sun, the air, the ground, building materials, and even your food [@shahbazi-gahrouei_review_2013]. A higher dose of radiation is receive on an airplane ride than the dose received while working at the reactor for the same amount of time. There is no escape.
 
-```{r dailyRadiation, fig.cap="Interaction of radiation and DNA, reprinted from Ministry of the Environment, Government of Japan [@noauthor_comparison_nodate]", fig.align="center"}
-include_graphics(path = "figure/daily radiation.png")
+```{r dailyRadiation,  fig.cap = 'Interaction of radiation and DNA, reprinted from Ministry of the Environment, Government of Japan', out.width = '100%', fig.align='center'}
+include_graphics("figure/daily radiation.png")
 ```
 
 
@@ -171,7 +213,8 @@ Remember those extremophiles? Bacteria can survive off of just about anything, s
 
 Inspired by Radioresistant microbes in the Reed Research Reactor (D. Dashevsky, Microbiology Lab Poster, Reed College, 2014), a short study by former microbiology student and reactor operator Daniel Dashevsky, we will isolate and identify bacteria from the primary filtration system of the Reed Research Reactor. In their project, Dashevsky isolated _Pseudomonas fluorescens_ (_P. fluorescens_) from the reactor systems that demonstrated radioresistance. In Spring of 2021, samples were collected from various parts of the Reed Research Reactor (RRR) primary filtration system using sterile swabs and nutrient agar plates. Sampling areas included the primary filter and housing, the pool floor, the pool walls, poolside fuel racks, and the top of the core. While many strains of bacteria were isolated from the initial sampling of the RRR primary filtration system, only 5 strains from the primary filter (1°F1 - 5) were used for the irradiation in addition to the three controls: Dra, the radioresistant positive control; DDev, the RRR isolated radioresistant positive control; _Escherichia coli_ ( _E. coli_ ) DH5-$\alpha$, the radiosensitive negative control. Overnight growths of these exposed to a dose of 877 µGy using a Cesium-137 source [insert activity] plated to observe differences in growth between irradiated and non-irradiated samples. 
 
-The result of this preliminary study reveal the potential of these bacteria and the RRR experimental systems to research radioresistant microorganisms. While the conclusions drawn from the study themselves do not reveal much, it allowed for experimental methods to be developed and refined for this thesis. In continuing the work, I have since found 3 strains of radioresistance _Bacillus_ species through UV irradiations and 16S analysis. Using the experimental facilities of the RRR, I hope to test and observe the hypothesis that the strains of radioresistant bacteria I find will contain robust DNA repair genes compared to standard lab strains to explain the basis of their radioresistance.
+The result of this preliminary study reveal the potential of these bacteria and the RRR experimental systems to research radioresistant microorganisms. While the conclusions drawn from the study themselves do not reveal much, it allowed for experimental methods to be developed and refined for this thesis. In continuing the work, I have since found 3 strains of radioresistance _Bacillus_ species through UV irradiation and 16S analysis. Using the experimental facilities of the RRR, I hope to test and observe the hypothesis that the strains of radioresistant bacteria I find will contain robust DNA repair genes compared to standard lab strains to explain the basis of their radioresistance.
+
 
 
 
