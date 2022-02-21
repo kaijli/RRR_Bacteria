@@ -34,6 +34,7 @@ ggplot(srl_dils, aes(x = Time, y = CFU_mL, color = Strain)) +
   geom_jitter() +
   geom_smooth(se = F, method = lm)
 ```
+
 ```{r eval = F}
 uv_sum <- streaks %>%
   group_by(Strain, Time) %>%
@@ -50,7 +51,7 @@ ggplot(uv_sum, aes(x = Time, y = median, color = Strain)) +
 ```
 ```{r streaks_end eval = F}
 final_uvs <- streaks %>%
-  filter(Strain == c("D. Rad", "1F1", "1F5", "DH5-alpha"))
+  filter(Strain == c("D. rad", "1F1", "1F5", "DH5-alpha"))
 ggplot(final_uvs, aes(x = Time, y = Colonies, color = Strain)) +
   geom_jitter() +
   geom_smooth(se = F, method = lm)
@@ -94,7 +95,7 @@ dh5a <- sz_uv %>%
   filter(Strain == 	"DH5-alpha")
 
 drad <- sz_uv %>%
-  filter(Strain == 	"D. Rad")
+  filter(Strain == 	"D. rad")
 
 f5 <- sz_uv %>%
   filter(Strain == 	"1F5")
@@ -114,29 +115,70 @@ t.test(x = cm1$CFU_0, y = cm1$CFU_60) #cm1
 t.test(x = fh2$CFU_0, y = fh2$CFU_60) #fh2
 ```
 
+```{r normalizing}
+normalizing <-nming_dils %>%
+  group_by(Strain)%>%
+  summarise(mean = mean(CFU_mL)) %>%
+  arrange(mean) %>%
+  mutate(ul_culture = mean[1]/mean*1000,
+         ul_PBS = 1000-ul_culture)
+normalizing
 
-```{r}
 
 ```
+
+
 ```{r normalized}
-sixtys_uv <- nmed_dils %>%
+n_sixtys_uv <- nmed_dils %>%
   filter(Time == 60) %>%
   group_by(Strain, Set) %>%
   summarise(CFU_60 = mean(CFU_mL))
 
-zeros_uv <- nmed_dils %>%
-  filter('Time' == 0) %>%
-  group_by('Strain', 'Set') %>%
-  summarise(CFU_0 = mean('CFU_mL'))
+n_zeros_uv <- nmed_dils %>%
+  filter(Time == 0) %>%
+  group_by(Strain, Set) %>%
+  summarise(CFU_0 = mean(CFU_mL))
 
-sz_uv <- left_join(zeros_uv, sixtys_uv)
+n_sz_uv <- left_join(n_zeros_uv, n_sixtys_uv)
 
-sz_uv <- sz_uv %>%
-  mutate(p_survival = 'CFU_60'/'CFU_0')
+n_sz_uv <- n_sz_uv %>%
+  mutate(p_survival = CFU_60/CFU_0)
 
-ggplot(sz_uv, aes(x = 'Strain', y = log('p_survival'), color = 'Strain')) +
+ggplot(n_sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   geom_boxplot() +
   labs(title = "Percent Survival of Strains in UV irradiation",
        y = "Log10 of Percent Survival")
-
+ggplot(n_sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
+  geom_boxplot() +
+  labs(title = "Percent Survival of Strains in UV irradiation",
+       y = "Percent Survival")
 ```
+
+```{r n_t_tests}
+n_dh5a <- n_sz_uv %>%
+  filter(Strain == 	"DH5-alpha")
+
+n_drad <- n_sz_uv %>%
+  filter(Strain == 	"D. rad")
+
+n_f5 <- n_sz_uv %>%
+  filter(Strain == 	"1F5")
+
+n_fh2 <- n_sz_uv %>%
+  filter(Strain == 	"1FH2")
+
+n_cm1 <- n_sz_uv %>%
+  filter(Strain == 	"CM1")
+
+
+t.test(x = n_sz_uv$CFU_0, y = n_sz_uv$CFU_60) #all strains
+t.test(x = n_dh5a$CFU_0, y = n_dh5a$CFU_60) #dh5a
+t.test(x = n_drad$CFU_0, y = n_drad$CFU_60) #drad
+t.test(x = n_f5$CFU_0, y = n_f5$CFU_60) #f5
+t.test(x = n_cm1$CFU_0, y = n_cm1$CFU_60) #cm1
+t.test(x = n_fh2$CFU_0, y = n_fh2$CFU_60) #fh2
+```
+
+
+
+

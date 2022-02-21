@@ -14,7 +14,7 @@ library(moderndive)
 
 
 ```{r avg}
-tecan_tidy <- read.csv("~/Thesis/RRR_Bacteria/Data/tecan_tidy.csv")
+tecan_tidy <- read.csv("~/Thesis/RRR_Bacteria/data/tecan_tidy.csv")
 
 tecan_avg <- tecan_tidy %>%
   group_by(strain, time)%>%
@@ -102,7 +102,9 @@ for (i in 1:length(strain_dfs)) {
                         slope = coef(lin_mod)[2]))
   i <- i + 1
 } 
-
+lms_sets <- lms_sets %>%
+    transform(intercept = as.numeric(intercept),
+            slope = as.numeric(slope))
 ```
 
 ```{r plot2}
@@ -120,6 +122,15 @@ ggplot(tecan_sets, aes(x = time, y = avg_A600)) +
                      values = c(0, 1, 2, 3, 4, 5, 6, 8))
 ```
 
+```{r}
+doubling <- lms_sets %>%
+  mutate(adj_slope = log10(slope*1000),
+         k = adj_slope*2.303,
+         g = 0.693/k,
+         doubling_hr = g/60/60) %>%
+  select(strain, slope, g, doubling_hr)
+doubling
+```
 
 
 
