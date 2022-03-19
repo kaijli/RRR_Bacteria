@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
+library(tidyverse); theme_set(theme_light())
 library(googlesheets4)
 ```
 
@@ -28,11 +28,15 @@ nmed_dils <- read_sheet(ss = url,
 ```{r eval = F}
 ggplot(streaks, aes(x = Time, y = Colonies, color = Strain)) +
   geom_jitter() +
-  geom_smooth(se = F, method = lm)
+  geom_smooth(se = F, method = lm) +
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
   
 ggplot(srl_dils, aes(x = Time, y = CFU_mL, color = Strain)) +
   geom_jitter() +
-  geom_smooth(se = F, method = lm)
+  geom_smooth(se = F, method = lm)+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
 ```
 
 ```{r eval = F}
@@ -47,20 +51,26 @@ uv_sum
 ```{r eval = F}
 ggplot(uv_sum, aes(x = Time, y = median, color = Strain)) +
   geom_jitter() +
-  geom_smooth(se = F, method = lm)
+  geom_smooth(se = F, method = lm)+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
 ```
 ```{r streaks_end eval = F}
 final_uvs <- streaks %>%
   filter(Strain == c("D. rad", "1F1", "1F5", "DH5-alpha"))
 ggplot(final_uvs, aes(x = Time, y = Colonies, color = Strain)) +
   geom_jitter() +
-  geom_smooth(se = F, method = lm)
+  geom_smooth(se = F, method = lm)+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
   
 pcr_strains <- streaks %>%
   filter(Strain == c("1F1", "1F5", "1FH2", "CM1"))
 ggplot(pcr_strains, aes(x = Time, y = Colonies, color = Strain)) +
   geom_jitter() +
-  geom_smooth(se = F, method = lm)
+  geom_smooth(se = F, method = lm)+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
   
   
 ```
@@ -86,7 +96,9 @@ sz_uv <- sz_uv %>%
 ggplot(sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   geom_boxplot() +
   labs(title = "Percent Survival of Strains in UV irradiation",
-       y = "Log10 of Percent Survival")
+       y = "Log10 of Percent Survival")+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
 
 ```
 
@@ -146,12 +158,17 @@ n_sz_uv <- n_sz_uv %>%
 
 ggplot(n_sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   geom_boxplot() +
-  labs(title = "Percent Survival of Strains in UV irradiation",
-       y = "Log10 of Percent Survival")
+  labs(title = "Percent Survival of Normalized Strains in UV irradiation",
+       y = "Log10 of Percent Survival")+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
+
 ggplot(n_sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
   geom_boxplot() +
-  labs(title = "Percent Survival of Strains in UV irradiation",
-       y = "Percent Survival")
+  labs(title = "Percent Survival of Normalized Strains in UV irradiation",
+       y = "Percent Survival")+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
 ```
 
 ```{r n_t_tests}
@@ -179,6 +196,18 @@ t.test(x = n_cm1$CFU_0, y = n_cm1$CFU_60) #cm1
 t.test(x = n_fh2$CFU_0, y = n_fh2$CFU_60) #fh2
 ```
 
+```{r}
+t.test(x = n_dh5a$p_survival, y = n_drad$p_survival) #dh5a
+t.test(x = n_dh5a$p_survival, y = n_f5$p_survival) #drad
+t.test(x = n_dh5a$p_survival, y = n_cm1$p_survival) #f5
+t.test(x = n_dh5a$p_survival, y = n_fh2$p_survival) #cm1
+t.test(x = n_drad$p_survival, y = n_f5$p_survival) #drad
+t.test(x = n_drad$p_survival, y = n_cm1$p_survival) #f5
+t.test(x = n_drad$p_survival, y = n_fh2$p_survival) #cm1
+t.test(x = n_f5$p_survival, y = n_cm1$p_survival) #f5
+t.test(x = n_f5$p_survival, y = n_fh2$p_survival) #cm1
+t.test(x = n_cm1$p_survival, y = n_fh2$p_survival) #cm1
+```
 
 
 

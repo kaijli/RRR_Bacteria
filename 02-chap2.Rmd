@@ -1,4 +1,4 @@
-# Mathematics and Science {#math-sci}
+# Results {#results}
 
 <!-- Required to number equations in HTML files -->
 <script type="text/x-mathjax-config">
@@ -7,67 +7,36 @@ MathJax.Hub.Config({
 });
 </script>
 
-## Math
+## Radioresistance? Part 1
 
-\TeX\ is the best way to typeset mathematics. Donald Knuth designed \TeX\ when he got frustrated at how long it was taking the typesetters to finish his book, which contained a lot of mathematics.  One nice feature of _R Markdown_ is its ability to read LaTeX code directly.
+While many strains of bacteria were isolated from the initial sampling of the RRR primary filtration system, only 3 strains from the Reed Research Reactor water system were used for the irradiation in addition controls D. rad, the radioresistant positive control, and DH5-$\alpha$, the radiosensitive negative control. From UV-exposed serial dilutions of strains, CFU/mL were calculated and compared between strains using percent survival. 
 
-If you are doing a thesis that will involve lots of math, you will want to read the following section which has been commented out. If you're not going to use math, skip over or delete this next commented section.
-
-
-<!-- MATH and PHYSICS majors: Uncomment the following section -->
-<!--
-$$\sum_{j=1}^n (\delta\theta_j)^2 \leq {{\beta_i^2}\over{\delta_i^2 + \rho_i^2}}
-\left[ 2\rho_i^2 + {\delta_i^2\beta_i^2\over{\delta_i^2 + \rho_i^2}} \right] \equiv \omega_i^2
-$$
-
-From Informational Dynamics, we have the following (Dave Braden):
-
-After _n_ such encounters the posterior density for $\theta$ is
-
-$$
-\pi(\theta|X_1< y_1,\dots,X_n<y_n) \varpropto \pi(\theta) \prod_{i=1}^n\int_{-\infty}^{y_i}
-   \exp\left(-{(x-\theta)^2\over{2\sigma^2}}\right)\ dx
-$$
-
-Another equation:
-
-$$\det\left|\,\begin{matrix}%
-c_0&c_1\hfill&c_2\hfill&\ldots&c_n\hfill\cr
-c_1&c_2\hfill&c_3\hfill&\ldots&c_{n+1}\hfill\cr
-c_2&c_3\hfill&c_4\hfill&\ldots&c_{n+2}\hfill\cr
-\,\vdots\hfill&\,\vdots\hfill&
-  \,\vdots\hfill&&\,\vdots\hfill\cr
-c_n&c_{n+1}\hfill&c_{n+2}\hfill&\ldots&c_{2n}\hfill\cr
-\end{matrix}\right|>0$$
+The first several rounds of UV irradiation showed considerable differences in percent survival for the three strains 1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1, and the controls D. rad and DH5-$\alpha$ (reference plate images). The colony counts were taken into consideration with time exposed to calculated percent survival for each strain to compare relative radioresistance (box-plot of percent survival). It was noticed, however, that there was a significant difference in CFU/mL post exposure in the same dilutions (20 versus 1 colony in the $10^{-2}$ dilutions for example). This caused concern about confounding variables such as growth rate for different strains as well as the difference in standard CFU/mL for overnight cultures. While these initial assays proved basic radioresistance for lightly regulated conditions, they also provided a strong basis for further experimentation.
 
 
-Lapidus and Pindar, Numerical Solution of Partial Differential Equations in Science and
-Engineering.  Page 54
+## Growth Rates
 
-$$
-\int_t\left\{\sum_{j=1}^3 T_j \left({d\phi_j\over dt}+k\phi_j\right)-kT_e\right\}w_i(t)\ dt=0,
-   \qquad\quad i=1,2,3.
-$$
+To tackle the first issue of different growth rates across strains, an overnight absorbency assay was run to calculate doubling times and ensure the show of radioresistance (or lack thereof) was not confused with slower growing characteristics of strains. 
+(insert growth curve)
+To calculate doubling time, the logarithmic growth portions of the curve were analyzed for the slope with highest linear fit. To ensure efficiency and accuracy, a script was written to consistently find the most linear portions of the curves (see Appendix for details/code). 
+(insert linear growth curve)
+(insert doubling time calculation/table)
+The strain with fastest growth was 1$^{\circ}$F5 and D. rad was the slowest growing, which could be observed on the plates, as colonies were often confluent for 1$^{\circ}$F5 and sparse for D. rad despite both showing indications of radioresistance. This could be due to much higher CFU/mL in overnight cultures, as they did not grow to the capacity of the liquid media. The two controls, DH5-$\alpha$ and D. rad, also portrayed different rates, which aligned with the observation of more growth of DH5-$\alpha$ than D. rad on unexposed plates. This confirms that the absence of DH5-$\alpha$ in exposed plates was not due to slow growth rates, but from radiation damage. Using information from growth rates, further characterization of strains was performed in addition to secondary analysis of initial plate exposures after this information was processed. 
 
-L\&P  Galerkin method weighting functions.  Page 55
+1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1, and the controls D. rad and DH5-$\alpha$
 
-$$
-\sum_{j=1}^3 T_j\int_0^1\left\{{d\phi_j\over dt} + k\phi_j\right\} \phi_i\ dt
-   = \int_{0}^1k\,T_e\phi_idt, \qquad i=1,2,3 $$
+## Radioresistance Part 2: electric bungaloo
 
-Another L\&P (p145)
+## Identification 
 
-$$
-\int_{-1}^1\!\int_{-1}^1\!\int_{-1}^1 f\big(\xi,\eta,\zeta\big)
-   = \sum_{k=1}^n\sum_{j=1}^n\sum_{i=1}^n w_i w_j w_k f\big( \xi,\eta,\zeta\big).
-$$
+### Gram Stains
 
-Another L\&P (p126)
+### 16S PCR
 
-$$
-\int_{A_e} (\,\cdot\,) dx dy = \int_{-1}^1\!\int_{-1}^1 (\,\cdot\,) \det[J] d\xi d\eta.
-$$
--->
+## Analysis
+
+
+
 
 ## Chemistry 101: Symbols
 
