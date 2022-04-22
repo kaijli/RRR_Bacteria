@@ -9,62 +9,79 @@ The {#rmd-basics} text after the chapter declaration will allow us to link throu
 # Materials and Methods {#mat-met}
 
 ## Initial Isolation
-Samples were taken from the primary filter and surfaces of the Reed Research Reactor pool using sterile swabs and counting water on the way to the pool floor as part of sample collection. Swabs were then used to grow lawns on nutrient broth agar plates (Sigma) and isolated through quadrant plating. A total of 10 isolates were grown from the samples, but only strains 1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1 were used for comprehensive growth and UV analysis.
+Samples were taken from the primary filter and surfaces of the Reed Research Reactor pool using sterile swabs and counting water on the way to the pool floor as part of sample collection. Swabs were attached to the end of a pole long enough to reach the bottom of the 25 feet deep pole, and after samples were collected, the cotton end of the swabs were broken off and put into tubes for transport to a sterile lab. Swabs were then used to grow lawns on nutrient broth agar plates (MilliporeSigma, St. Louis, Mo) and isolated via streak purification. A total of 10 isolates were grown from the samples, but only strains 1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1 were used for comprehensive growth and UV analysis.
 
 ## UV testing of isolates
 
-The bacterial strains and plasmids used in this study are listed in Table 1. Liquid cultures were grown in lysogeny broth (LB: Tryptone 10 g/L, Sodium Chloride 10 g/L, Yeast Extract 5 g/L) at 37$^{\circ}$C and plated on LB agar plates for subsequent assays before another overnight growth.  
+The bacterial strains and plasmids used in this study are listed in Table \@ref(tab:isolates). Liquid cultures were grown in lysogeny broth (LB: Tryptone 10 g/L, Sodium Chloride 10 g/L, Yeast Extract 5 g/L) at 37$^{\circ}$C and plated on LB agar plates for subsequent assays before another overnight growth.  
 
-<!-- insert table for isolates and naming conventions -->
+<!-- Table: Isolates of focus in this study -->
+```{r isolates}
+isolates_path <- here::here("data", "isolates.csv")
+isolates <- read.csv(isolates_path, stringsAsFactors = FALSE)
+kable(isolates,
+col.names = c("Strain", "Genotype and Description", "Source"), caption = "Isolates of focus in this study", caption.short = "Isolates of Focus", longtable = TRUE,
+booktabs = TRUE
+)
+```
 
-The initial UV testing of the original 10 isolates from Spring 2021 and two controls—D. rad and DH5-$\alpha$— to compare phenotypes of these strains with D. Dev’s initial results. Using an inoculating loop, overnight cultures were streaked across the plate. Vertical quadrants of the plates were exposed for 0, 15, 30, or 60 seconds to 302 nm UV light using a 2 UV Transilluminator.  Aluminum foil was used to shield unexposed or less-exposed areas. After exposure, plates were incubated overnight at 30$^{\circ}$C and plate counts were performed.  
+The initial UV testing of the original 10 isolates from Spring 2021 and two controls—D. rad and DH5-$\alpha$— to compare the phenotype of these strains with D. Dev’s initial results. Using an inoculating loop, overnight cultures were streaked across a plate superimposed on a grid for organization. Vertical quadrants of the plates were exposed for 0, 15, 30, or 60 seconds to 302 nm UV light using a 2 UV$^{\text{TM}}$ Transilluminator (Analytik Jena GmbH, Jena, Germany).  Aluminum foil was used to shield unexposed or less-exposed areas, equally measured using the superimposed grid. After exposure, plates were incubated overnight at 30$^{\circ}$C and plate counts were performed. 
 
-The secondary use of UV exposure was with serial dilutions of $10^0$, $10^{-1}$, $10^{-2}$, $10^{-3}$, $10^{-4}$, $10^{-5}$, and $10^{-6}$ to observe percent survival of each 1$^{\circ}$F5, 1$^{\circ}$FH2, CM1, D. rad, and DH5-$\alpha$. The dilutions were made using 1:10 ratios from $10^0$ to $10^{-5}$ in 1X Phosphate-Buffered Saline (PBS) (Sodium Chloride 8 g/L, Potassium Chloride 0.2 g/L, Sodium Phosphate Dibasic 1.44 g/L, Potassium Phosphate Monobasic 0.245 g/L, pH 7.5 $\pm$0.2 at 25$^{\circ}$C). Then, 10 $\mu$L from each dilution was spotted onto plates. Sets of three plates were exposed to UV for 0, 30, and 60 seconds gel-side-down, then incubated overnight at 30$^{\circ}$C. After incubation, colonies were counted and CFU/mL from serial dilutions was used to calculate percent survival across the different exposure times.  
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/StreakUV.png}
+\caption[UV - Streaks]{Examples of how UV exposures were performed on plate streaks. For the 60 second streak, aluminum foil would cover up to the line between 60 and 30 seconds, and after 30 seconds, the aluminum foil would then move to cover the 15 and 0 second areas. After 15 seconds of exposing both the 60 and 30 second areas, the foil would again move to conceal only the 0 second area. After another 15 seconds, the exposure is complete so that each area receives the indicated time of exposure to UV. Note that several of these strains are not analyzed later in the study due to their lack of UV resistance.}
+\end{figure}
 
-The third set of UV exposures was performed with normalized $10^0$ CFU/mL across all strains for better comparison of percent survival and growth rate of strains. Normalization was performed by growing overnights of each strain, plating serial dilutions, incubating overnight, then counting CFU/mL. The CFU/mL counted from the first plating was then used to dilute fresh overnight liquid culture to the same CFU/mL to start for serial dilutions with UV exposure. 
+The secondary use of UV exposure was with serial dilutions of $10^0$, $10^{-1}$, $10^{-2}$, $10^{-3}$, $10^{-4}$, $10^{-5}$, and $10^{-6}$ to observe percent survival of each 1$^{\circ}$F5, 1$^{\circ}$FH2, CM1, D. rad, and DH5-$\alpha$. The dilutions were made using 1:10 ratios from $10^0$ to $10^{-5}$ in 1X Phosphate-Buffered Saline (PBS) (Sodium Chloride 8 g/L, Potassium Chloride 0.2 g/L, Sodium Phosphate Dibasic 1.44 g/L, Potassium Phosphate Monobasic 0.245 g/L, pH 7.5 $\pm$0.2 at 25$^{\circ}$C). In a sterile fume hood, 10 $\mu$L from each dilution was spotted onto plates superimposed on a grid and left to dry completely before inverting for UV exposure and incubation. Sets of three plates were exposed to UV for 0, 30, or 60 seconds gel-side-down, then incubated overnight at 30$^{\circ}$C. After incubation, colonies were counted and CFU/mL from serial dilutions was used to calculate percent survival across the different exposure times.  
+
+The third set of UV exposures was performed with normalized to $2.2*10^5$ CFU/mL as the $10^0$ dilution across all strains for better comparison of percent survival and growth rate of strains. This was to confirm that noted UV resistance was not just from quick growth rates or from high CFU/mL in the starting culture. Normalization was performed by growing overnights of each strain, plating serial dilutions, incubating overnight, then counting CFU/mL. The CFU/mL counted from the first plating was then used to dilute all fresh overnight liquid culture to approximately $2.2*10^5$ CFU/mL for serial dilutions with UV exposure. 
 
 ## 16S PCR Analysis
 
-The following 16S primers were used to determine genus level classification of isolates. Prior to PCR, isolates were incubated overnight at 30$^{\circ}$C in nutrient broth.
+The following 16S primers in Table \@ref(tab:primers) [@kroes_bacterial_1999] were used to determine genus level classification of isolates. Prior to PCR, isolates were incubated overnight at 30$^{\circ}$C in nutrient broth.
+```{r primers}
+primers_path <- here::here("data", "primers.csv")
+primers <- read.csv(primers_path, stringsAsFactors = FALSE)
+kable(primers,
+      col.names = c("Primer", "Sequence(5'-3')"), 
+      caption = "Primers used for 16S Analysis", 
+      caption.short = "Primers", 
+      longtable = TRUE,
+      booktabs = TRUE
+)
+```
 
-<!-- insert table for primers -->
-<!-- insert table for primer pairs -->
+```{r pcr}
+pcr_path <- here::here("data", "pcr.csv")
+pcr <- read.csv(pcr_path, stringsAsFactors = FALSE)
+kable(pcr,
+col.names = c("Mix Number", "Forward Primer", "Reverse Primer"), caption = "Primers Pairs for PCR", 
+caption.short = "Primer Pairs", 
+longtable = TRUE,
+booktabs = TRUE
+)
+```
 
-PCR was conducted to amplify 16S rRNA to assess microbial diversity using primers listed in Table 2 and the combinations in Table 3 using Q5 High-Fidelity DNA Polymerase (New England BioLabs, Ipswich, MA) according to standard procedures. Cycling conditions (T100, BioRad) were 98$^{\circ}$C 40 sec, followed by varied cycles of 95$^{\circ}$C 10 sec, annealing temperature 55$^{\circ}$C 30 sec, 72$^{\circ}$C 30 sec. Samples were run in duplicate for 30 cycles total. 
+PCR was conducted to amplify 16S rRNA to assess microbial diversity using primers listed in Table \@ref(tab:primers) and the combinations in Table \@ref(tab:pcr) using Q5 High-Fidelity DNA Polymerase (New England BioLabs, Ipswich, MA) according to standard procedures. Cycling conditions (T100, Bio-Rad Laboratories, Hercules, CA) were 98$^{\circ}$C 40 sec, followed by varied cycles of 95$^{\circ}$C 10 sec, annealing temperature 55$^{\circ}$C 30 sec, 72$^{\circ}$C 30 sec. Samples were run in duplicate for 30 cycles total. 
 
-DNA samples were separated on 25 mL 0.8% agarose (GenePure) in 1xTBE with 3 $\mu$L SybrSafe at 90-120 V. 12 $\mu$L of PCR product was prepared with 3 $\mu$L volume 6X DNA gel loading mix and run next to 250 ng of Quick-Load Purple 2-Log DNA ladder (0.1-10.0 kb). For controls, nuclease-free water was run in parallel. 
+DNA samples were separated on 25 mL 0.8% agarose (Thermo Fisher Scientific Inc., Waltham, MA) in 1xTBE with 3 $\mu$L SybrSafe (Thermo Fisher Scientific Inc., Waltham, MA) at 90-120 V. 12 $\mu$L of PCR product was prepared with 3 $\mu$L volume 6X DNA gel loading mix (Thermo Fisher Scientific Inc., Waltham, MA) and run next to 250 ng of Quick-Load Purple 2-Log DNA ladder (0.1-10.0 kb) (New England BioLabs, Ipswich, MA). For controls, nuclease-free water was run in parallel to ensure the water used for primer master mixes was not contaminated. 
 
-QIAquick Gel Extraction Kit (Qiagen Corp., Carlsbad, CA) was used to extract DNA from PCR products run on agarose gels to send in for sequencing of segments between 16S primer pairs. DNA fragments were excised as bands from agarose gel using scalpel on Transilluminator for visibility, and extraction was performed according to standard procedures. Product was sent to ACGT, Inc. (Wheeling, IL) for sequencing, and resulting FASTA files were analyzed via SnapGene Viewer ( GSL Biotech LLC, San Diego, CA) and run through NCBI nucleotide blasts for genus-level identification.
+The QIAquick Gel Extraction Kit (Qiagen Corp., Carlsbad, CA) was used to extract DNA from PCR products run on agarose gels to send in for sequencing of segments between 16S primer pairs. DNA fragments were excised as bands from agarose gel using scalpel on Transilluminator for visibility, and extraction was performed according to standard procedures. Product was sent to ACGT, Inc. (Wheeling, IL) for sequencing, and resulting FASTA files were analyzed via SnapGene Viewer (GSL Biotech LLC, San Diego, CA) and run through NCBI nucleotide blasts for genus-level identification.
 
 ## Growth Rate Analysis  
 
-To observe different growth rates independent of radioresistance, turbidity was measured by an Infinite 200 Pro microplate reader (Tecan, Männedorf, Switzerland) at 600 nm absorbance. Bacteria grown in LB were incubated at 30$^{\circ}$C for 24 hours at 30 minute intervals in a Greiner 96 Flat Bottom Transparent Polystyrene well plate.
+To observe different growth rates independent of radioresistance, turbidity was measured by an Infinite 200 Pro microplate reader (Tecan, Männedorf, Switzerland) at 600 nm absorbance. Bacteria grown in LB were incubated at 30$^{\circ}$C for 24 hours at 30 minute intervals in a Greiner 96 Flat Bottom Transparent Polystyrene well plate (MilliporeSigma, St. Louis, Mo).
 
 ## Gram Staining
 
-Specimen was heat-fixed onto microscope slide by adding one drop of dH2O to slide and transferring minute amount of color on solid media onto slide. If in liquid media, one drop was transferred via inoculating loop. Mixture was spread evenly across 1.5 cm diameter circle and air dried. Using clothespin, slide was passed over a gentle flame to fix the cells.  5 drops of crystal violet stain was applied over fixed culture and incubated for 60 seconds before rinsing with dH2O. Then, 5 drops of iodine solution were added, and incubated for 30 second before rinsing with dH2O. A couple drops of 95% ethanol  was used to decolorize for no more than 5 seconds before rinsing with dH2O until solution ran clear. Slide was counterstained with 5 drops of safranin solution for 20 seconds and rinsed with dH2O before blotting dry to observe under microscope.
+For inital characterization while awaiting 16S sequencing results from ACGT, Inc., samples were heat-fixed onto microscope slides by adding one drop of dH2O to slide and transferring a minute amount of a colony on solid media onto slide. For liquid cultures, one drop was transferred via inoculating loop. Mixture was spread evenly across 1.5 cm diameter circle and air dried. Using a clothespin, the slide was passed over a gentle flame to fix the cells. 5 drops of crystal violet stain were applied over the fixed culture and incubated for 60 seconds before rinsing with dH2O. Then, 5 drops of iodine solution were added, and incubated for 30 second before rinsing with dH2O. A couple drops of 95% ethanol were used to decolorize the slide for no more than 5 seconds before rinsing with dH2O until solution ran clear. Slide was counterstained with 5 drops of safranin solution for 20 seconds and rinsed with dH2O before blotting dry to observed at 400 magnification (Olympus CH30, Olympus America Inc., Melville, NY). If the bacteria observed under a compound microscope were purple, they'd be Gram-positive. If the bacteria were pink or red, they'd be Gram-negative. All strains isolated and observed in this study were Gram-positive. The staining also aided in observing relative sizes. 
 
 ## DNA Sequencing Analysis
+To prepare for while genome sequencing of strain CM1, the QIAGEN Genomic DNA (Qiagen Corp., Carlsbad, CA) handbook and kit were used according to procedure for bacterial samples. The isolated DNA was eluted in 1.5 mL nuclease free H$_2$O for sequencing and the concentration was determined using a NanoDrop ND-1000 spectrophotometer (Thermo Fisher Scientific Inc., Waltham, MA) to be around 14 $\mu$g/mL. A 500 $\mu$g/mL sample was sent to Novogene (Novogene Co, Davis, CA) for whole genome sequencing. 
 
-All plasmid constructs were confirmed to be correct by DNA sequencing analysis performed at the Vollum Institute at the Oregon Health and Science University.
+After a quality check using gel electrophoresis and a Qubit Fluorometer, raw data was read using an Illumina Sequence Identifier and cleaned up using a variety of internal quality control steps. The Burrows-Wheeler Aligner was utilized to map the paired-end clean reads to the reference genome of Priestia megaterium ASM993541v1 [@noauthor_priestia_nodate]. Novogene then used the Genome Analysis Toolkit (Broad Institute, Cambridge, Massachusetts) to mark single nucleotide polymorphisms (SNP) and insertions or deletions from the mapped files, and then ANNOVAR (https://annovar.openbioinformatics.org/en/latest/) to annotate the different variants between the CM1 genome and the reference genome. Structural variants were isolated from the mapped genome files using breakdancer (https://github.com/kenchen/breakdancer) and ANNOVAR for annotation. Copy number variants were isolated using CNVnator (Bioinformaticshome.com) and ANNOVAR to annotate. A final report with results from above analysis was provided by Novogene, but the figures are not used in this study due to lack of niche understanding. 
 
+For whole genome sequencing, the isolated DNA is cut up into pieces and attached to specific adapters for the sequencing machinery. They're then read many times over and eventually, the genome is pieced together by observing overlapping sequencing that appear from the random fragmentation of the strands of DNA. After the genome is cleaned up and ready for analysis, programs compare it to the reference genome for differences such as single base pair changes (SNPs), places where parts of genes have been removed, replaced, or duplicated, and other general ways the analyzed genome is different from the reference. 
 
-
-## Additional resources
-
-- _Markdown_ Cheatsheet - <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
-
-- _R Markdown_
-    - Reference Guide - <https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf>
-    - Cheatsheet - <https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf>
-
-- _RStudio IDE_
-    - Cheatsheet - <https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf>
-    - Official website - <https://rstudio.com/products/rstudio/>
-
-- Introduction to `dplyr` - <https://cran.rstudio.com/web/packages/dplyr/vignettes/dplyr.html>
-
-- `ggplot2`
-    - Documentation - <https://ggplot2.tidyverse.org/>
-    - Cheatsheet - <https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf>
-
+After receiving the data from Novogene, the clean data files were uploaded to PATRIC Genome Assembly (https://www.patricbrc.org/) due to errors thrown when trying to annotate and map the information in a more user-friendly format than text files using RAST (https://rast.nmpdr.org/). RAST then was able to annotate and group the genes into subsystems for analysis and comparison of DNA metabolism mechanisms between the reference and CM1 genomes, as per the goal of this study. Using the SEED Viewer (https://rast.nmpdr.org/seedviewer.cgi) portion of RAST, the different genes for DNA metabolism and UvrABC system (DNA repair system in response to UV damage). The analysis performed on the genomic data was rudimentary due to time and experience restraints, but initial conclusions reveal endless paths for future studies. 

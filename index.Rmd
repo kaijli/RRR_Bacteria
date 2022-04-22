@@ -47,9 +47,9 @@ preface: |
   (for LaTeX) and the R bookdown package, in general.
   
 # Specify the location of the bibliography below
-bibliography: bib/d2I1.bib
+bibliography: bib/d3L1.bib
 # Download your specific csl file and refer to it in the line below.
-csl: csl/apa.csl
+csl: csl/asm.csl
 lot: true
 lof: true
 ---
@@ -123,8 +123,8 @@ if (!require(thesisdown)) {
 library(thesisdown)
 library(dplyr)
 library(ggplot2)
-library(knitr)
 library(graphics)
+library(knitr)
 # Set how wide the R output will go
 options(width = 70)
 ```
@@ -177,9 +177,14 @@ The biological effects of radiation have also been thoroughly studied since the 
 The resulting hydrogen peroxide is a powerful oxidizing agent, and can thus affect molecules or cells that were not initially affected by radiation. While all organisms have some form of DNA or macromolecule repair mechanisms, most are not equipped for large scales of damage. Radiation damage is irreversible, so unless the damaged cells are quickly replaced by healthy ones, this can lead to the demise of organisms. [@cember_introduction_1996] 
 
 
-```{r radiationDNA, out.width = '100%', fig.align='center', fig.cap='Interaction of radiation and DNA, adapted from Przystupski et al.'}
-include_graphics("figure/radiation_DNA.png")
-```
+# ```{r radiationDNA, out.width = '100%', fig.align='center', fig.cap='Interaction of radiation and DNA, adapted from Przystupski et al.'}
+# include_graphics("figure/radiation_DNA.png")
+# ```
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/radiation_DNA.png}
+\caption[Interaction of radiation and DNA]{Interaction of radiation and DNA, adapted from Przystupski et al.[@przystupski_cytoprotective_2019], describes how high energy particles, which can be from radiation such as $\alpha$, $\beta$, and $\gamma$, interacts with deoxyribonucleic acid.}
+\end{figure}
 
 In 1956, the discovery of D. rad as a contaminant in radiation-sterilized corned beef cans brought about DNA-centered molecular biology [@krisko_biology_2013]. Radiosensitivity varies between quiescent and slow dividing cells versus cells with high proliferation rates. Like with growth-arrested bacteria and antibiotics, quiescent and slow dividing cells are less radiosensitive. Growth-arrested bacteria inactivate antibiotic targets, allowing the cells to remain dormant until the threat has passed. In slow growing cells, DNA repair mechanisms have the time to repair damage many times more than in standard growing species, allowing them to make sure every new cell is well-made. For example, D. rad is just as radiosensitive as many other bacteria, but due to its investment in efficiency of survival over growth, not only does it present spectacular DNA repair capacity for radioresistance, but also resistance to desiccation [@krisko_biology_2013]. Other organisms studied for radioresistance include _Escherichia coli_ (_E. coli_), a less radioresistant bacteria found to produce resistant mutants based on environmental conditions and physiological factors, and melanin rich fungus found at the Chernobyl disaster site better protected against UV, solar, and ionizing radiation than its less pigmented relatives [@witkin_inherited_1946, @dadachova_ionizing_2007]. 
 
@@ -193,18 +198,28 @@ Why do we have a reactor anyway? Reed does not have engineering as a major, much
 
 Let’s do a quick crash course on radiation and health physics. Sometimes, atomic nuclei find themselves in unstable configurations due to energy imbalances or particle interactions. This instability makes the atom radioactive, so to relax and stabilize, the nucleus undergoes a process to lose energy by ejecting smaller particles or rearranging the protons and neutrons. The smaller particles containing energy are called radiation, and the process is radioactive decay. There are three types of ionizing radiation: alpha, beta, and gamma. Alpha particles are essentially a helium atom without electrons, composed of two protons and two neutrons. It’s the heaviest of the three molecules, so it won’t travel very far but will do a lot of damage if it gets to an unprotected area. This type of radiation is easiest to shield against—even the dead layer of cells covering your skin will do. Beta particles are similar to electrons, but ejected from the nucleus of an atom to turn a proton into a neutron, or absorbed to do the opposite. It’s much lighter than the alpha particle, and can travel a little further, and need low atomic mass materials such as several inches of wood, plastic, or a sheet of aluminum foil to stop them. Lastly, gamma radiation is pure energy, completely mass-less. It can easily make its way through materials and needs a good amount of lead or concrete to shield it. Outside of ionizing radiation is neutron radiation. These particles don’t ionize other atoms, instead the target can be made radioactive through a process called neutron activation to release one of three above ionizing radiations. Due to their neutral charge and lack of ionizing capabilities, neutrons are difficult to directly detect using typical hand-held radiation detectors such as Gieger-Mullers, and instead need various calculations or different instruments to accurately measure. To protect ourselves from them, we need three layers: one to slow it down (water), one to absorb it (boron), and one to shield from the resulting gammas released (concrete).
 
-```{r typesOfRadiation, fig.cap = 'Interaction of radiation and DNA, reprinted from American Nuclear Society.', out.width = '100%', fig.align='center'}
-include_graphics("figure/types of radiation.png")
-```
+# ```{r typesOfRadiation, fig.cap = 'Interaction of radiation and DNA, reprinted from American Nuclear Society.', out.width = '100%', fig.align='center'}
+# include_graphics("figure/types of radiation.png")
+# ```
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/types of radiation.png}
+\caption[Types of Radiation]{Types of radiation and what's needed to shield from them,reprinted from American Nuclear Society [@noauthor_radiation_nodate].}
+\end{figure}
+
 
 Why do we even want to shield ourselves from radiation? Atoms make up everything, so when the stability of an atom is disrupted, it can be like pulling the wrong piece out of a precariously balanced stack of blocks. In your body, the ionization radiation interacts mostly with water, which results in an unpaired election called free radical. This free radical is extremely reactive, so the slightly negatively charged water molecule will try to interact with anything it’s close to, and since the body is 70% water, there will be a lot of free radicals to mess with the status quo as mentioned previously. Tucked behind both a cell and nucleus membranes in eukaryotic cells is the vital molecule, deoxynucleic acid (DNA). DNA is the first component to the central dogma of biology, where it acts as the blueprint for the production of all other things—from proteins, to cells, tissue, organs, and organisms. Ionizing radiation and its results can destabilize membranes and the charged particles will interact with the DNA, causing base and sugar damage, single stranded breaks, and double stranded breaks. Double stranded breaks are often the most lethal, as chromosomal rearrangement can occur, repair is slow, and cell death or delayed mitosis can result. While there are many cell mechanisms that exist to repair these dangers, there can be too much damage and not enough time to effectively save the cell and its progeny. 
 
 Oh no, radiation sounds so scary! If I’m irradiated, can I turn into a non-trademarked superhero? Absolutely not. You might just die. Also, radiation is all around you! It’s constantly emitted from sources such as the sun, the air, the ground, building materials, and even your food [@shahbazi-gahrouei_review_2013]. A higher dose of radiation is receive on an airplane ride than the dose received while working at the reactor for the same amount of time. There is no escape.
 
-```{r dailyRadiation,  fig.cap = 'Interaction of radiation and DNA, reprinted from Ministry of the Environment, Government of Japan', out.width = '100%', fig.align='center'}
-include_graphics("figure/daily radiation.png")
-```
-
+# ```{r dailyRadiation,  fig.cap = 'Interaction of radiation and DNA, reprinted from Ministry of the Environment, Government of Japan', out.width = '100%', fig.align='center'}
+# include_graphics("figure/daily radiation.png")
+# ```
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/daily radiation.png}
+\caption[Daily Radiation]{Typical sources of radiation in day-to-day life, reprinted from Ministry of the Environment, Government of Japan [@noauthor_comparison_nodate].}
+\end{figure}
 
 ## So what am I doing here?
 
@@ -218,6 +233,6 @@ The result of this preliminary study reveal the potential of these bacteria and 
 
 
 
-**For additional help with bookdown** 
+<!-- **For additional help with bookdown**  -->
 
-Please visit [the free online bookdown reference guide](https://bookdown.org/yihui/bookdown/).
+<!-- Please visit [the free online bookdown reference guide](https://bookdown.org/yihui/bookdown/). -->
