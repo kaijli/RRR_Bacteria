@@ -221,4 +221,65 @@ t.test(x = n_cm1$p_survival, y = n_fh2$p_survival) #cm1
 ```
 
 
+```{r}
+DH5A_z_nuv <- nmed_dils %>%
+  filter(Time == 0) %>%
+  group_by(Strain, Set)%>%
+  filter(Strain == "DH5A") %>%
+  select(-Time)
+DH5A_z_nuv
+
+write.csv(DH5A_z_nuv, here::here("data", "DH5A_z_nuv.csv"), row.names = FALSE)
+```
+
+```{r anova}
+library(ggpubr)
+library(broom)
+library(AICcmodavg)
+
+combined_szs <- n_sz_uv %>%
+  mutate(normalized = TRUE)
+temp_sz_uv <- sz_uv %>%
+  mutate(normalized = FALSE)
+combined_szs <- bind_rows(combined_szs, temp_sz_uv)
+
+
+
+n_one_way <- aov(p_survival ~ Strain, data = n_sz_uv)
+one_way <- aov(p_survival ~ Strain, data = sz_uv)
+c_one_way <- aov(p_survival ~ Strain, data = combined_szs)
+one_way <- aov(p_survival ~ Strain, data = sz_uv)
+two_way <- aov(p_survival ~ Strain + normalized, data = combined_szs)
+interaction <- aov(p_survival ~ Strain * normalized, data = combined_szs)
+blocking <- aov(p_survival ~ Strain + normalized + Set, data = combined_szs)
+
+model.set <- list(n_one_way, one_way, c_one_way, two_way, interaction, blocking)
+model.names <- c("n_one_way", "one_way","c_one_way", "two_way", "interaction", "blocking")
+
+aictab(model.set, modnames = model.names)
+# model with the lowest AIC score (listed first in the table) is the best fit for the data
+
+par(mfrow=c(2,2))
+plot(one_way)
+par(mfrow=c(1,1))
+
+
+par(mfrow=c(2,2))
+plot(c_one_way)
+par(mfrow=c(1,1))
+
+tukey_two_way <- TukeyHSD(two_way)
+tukey_two_way
+
+summary(n_one_way)
+summary(one_way)
+
+tukey_n_one_way<-TukeyHSD(n_one_way)
+tukey_n_one_way
+tukey_one_way<-TukeyHSD(one_way)
+tukey_one_way
+
+plot(tukey_n_one_way, las = 1)
+plot(tukey_one_way, las = 1)
+```
 
