@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse); theme_set(theme_light())
 library(googlesheets4)
+library(viridis)
 ```
 
 #
@@ -57,7 +58,7 @@ ggplot(uv_sum, aes(x = Time, y = median, color = Strain)) +
 ```
 ```{r streaks_end eval = F}
 final_uvs <- streaks %>%
-  filter(Strain == c("D. rad", "1F1", "1F5", "DH5-alpha"))
+  filter(Strain == c("DRAD", "1F1", "1F5", "DH5A"))
 ggplot(final_uvs, aes(x = Time, y = Colonies, color = Strain)) +
   geom_jitter() +
   geom_smooth(se = F, method = lm)+
@@ -93,6 +94,8 @@ sz_uv <- left_join(zeros_uv, sixtys_uv)
 sz_uv <- sz_uv %>%
   mutate(p_survival = CFU_60/CFU_0)
 
+write.csv(sz_uv,here::here("data", "sz_uv.csv"), row.names = FALSE)
+
 ggplot(sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   geom_boxplot() +
   labs(title = "Percent Survival of Strains in UV irradiation",
@@ -100,14 +103,20 @@ ggplot(sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   scale_color_viridis(discrete=TRUE)  +
   theme(text=element_text(family="serif"))
 
+ggplot(sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
+  geom_boxplot() +
+  labs(title = "Percent Survival of Strains in UV irradiation",
+       y = "Percent Survival")+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
 ```
 
 ```{r t_tests}
 dh5a <- sz_uv %>%
-  filter(Strain == 	"DH5-alpha")
+  filter(Strain == 	"DH5A")
 
 drad <- sz_uv %>%
-  filter(Strain == 	"D. rad")
+  filter(Strain == 	"DRAD")
 
 f5 <- sz_uv %>%
   filter(Strain == 	"1F5")
@@ -156,6 +165,8 @@ n_sz_uv <- left_join(n_zeros_uv, n_sixtys_uv)
 n_sz_uv <- n_sz_uv %>%
   mutate(p_survival = CFU_60/CFU_0)
 
+write.csv(n_sz_uv,here::here("data", "n_sz_uv.csv"), row.names = FALSE)
+
 ggplot(n_sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
   geom_boxplot() +
   labs(title = "Percent Survival of Normalized Strains in UV irradiation",
@@ -173,10 +184,10 @@ ggplot(n_sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
 
 ```{r n_t_tests}
 n_dh5a <- n_sz_uv %>%
-  filter(Strain == 	"DH5-alpha")
+  filter(Strain == 	"DH5A")
 
 n_drad <- n_sz_uv %>%
-  filter(Strain == 	"D. rad")
+  filter(Strain == 	"DRAD")
 
 n_f5 <- n_sz_uv %>%
   filter(Strain == 	"1F5")

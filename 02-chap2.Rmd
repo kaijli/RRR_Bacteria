@@ -9,29 +9,159 @@ MathJax.Hub.Config({
 
 ## Radioresistance? Part 1
 
-While many strains of bacteria were isolated from the initial sampling of the Reed Research Reactor (RRR) primary filtration system, only 3 strains from the Reed Research Reactor water system were used for the irradiation in addition controls _Deinococcus radiodurans_ (D. rad), the radioresistant positive control, and _Escherichia coli_ (_E. coli_) strain DH5-$\alpha$, the radiosensitive negative control. From UV-exposed serial dilutions of strains, CFU/mL were calculated and compared between strains using percent survival. 
+While many strains of bacteria were isolated from the initial sampling of the Reed Research Reactor (RRR) primary filtration system, only 3 strains from the Reed Research Reactor water system were used for the irradiation in addition controls _Deinococcus radiodurans_ (D. rad), the radioresistant positive control, and _Escherichia coli_ (_E. coli_) strain DH5-$\alpha$, the radiosensitive negative control. From UV-exposed serial dilutions of strains, CFU/mL were calculated and compared between strains using percent survival. With Figure \ref(fig:0secUV), the average CFU/mL calculated from colony counts across triplicate plates was used as the base, expected number of colonies if the strains were radioresistant. That number is then compared to the average CFU/mL for each strain in Figure \ref(fig:60secUV) as per Equation \ref(eq:psurvival).
 
-The first several rounds of UV irradiation showed considerable differences in percent survival for the three strains 1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1, and the controls D. rad and DH5-$\alpha$ (reference plate images). The colony counts were taken into consideration with time exposed to calculated percent survival for each strain to compare relative radioresistance (box-plot of percent survival). It was noticed, however, that there was a significant difference in CFU/mL post exposure in the same dilutions (20 versus 1 colony in the $10^{-2}$ dilutions for example). This caused concern about confounding variables such as growth rate for different strains as well as the difference in standard CFU/mL for overnight cultures. While these initial assays proved basic radioresistance for lightly regulated conditions, they also provided a strong basis for further experimentation.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/0secUV.png}
+\caption[0 second UV]{Growth of strains without UV interferance. Serial dilution LB plate without CFU/mL normalization, unexposed to UV light, and after overnight growth at 30$^\circ$C. Serial dilutions were made using fresh overnight cultures and LB. Each strain is labeled with their own row, and dilutions are labeld for each column.}
+\label{fig:0secUV}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/60secUV.png}
+\caption[60 second UV]{Growth of strains with UV interferance. Serial dilution LB plate without CFU/mL normalization, exposed to UV light for 60 seconds, and after overnight growth at 30$^\circ$C. Serial dilutions were made using fresh overnight cultures and LB. Each strain is labeled with their own row, and dilutions are labeld for each column.}
+\label{fig:60secUV}
+\end{figure}
+
+```{r sz_uv, echo=FALSE, fig.cap= "Percent Survival of Strains in UV irradiation. For each strain, sets of three serial dilution plates were either exposed to UV for 60 seconds or not exposed at all. The CFU/mL were calculated and used to graph percent survival. Each boxplot consists of three percent survival values from each set of plates. This figure was produced using RStudio, ggplot, and Viridis."}
+sz_uv_path <- here::here("data", "sz_uv.csv")
+sz_uv <- read.csv(sz_uv_path, stringsAsFactors = FALSE)
+
+ggplot(sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
+  geom_boxplot() +
+  labs(#title = "Percent Survival of Strains in UV irradiation",
+       y = "Percent Survival")+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
+```
+
+
+The first several rounds of UV irradiation showed considerable differences in percent survival for the three strains 1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1, and the controls D. rad and DH5-$\alpha$ (Figure \@ref{fig:sz_uv}). The colony counts were taken into consideration with time exposed to calculated percent survival for each strain to compare relative radioresistance (Figures \ref(fig:0secUV) and \ref(fig:60secUV)). It was noticed, however, that there was a significant difference in CFU/mL post exposure in the same dilutions (10 colonies for 1$^\circ$FH2 versus 3 colonies for CM1 in the $10^{-4}$ dilutions for example, Figure \ref(fig:0secUV)). This caused concern about confounding variables such as growth rate for different strains as well as the difference in standard CFU/mL for overnight cultures. While these initial assays proved basic radioresistance for lightly regulated conditions, they also provided a strong basis for further experimentation.
+
+The t-tests run for this set of data compared average CFU/mL within strains between 60 seconds and 0 seconds of UV exposure. For t-tests the higher the t-value, the larger the difference that exists between the two samples. In Table \@ref(ttests1), the t-test values from largest to smallest correspond to DH5-$\alpha$, 1$^\circ$FH2, 1$^\circ$F5, CM1, then D. rad. This means that DH5-$\alpha$ saw the largest change in CFU/mL caused by UV exposure and D. rad saw the least, as expected for the negative and positive radioresistant controls, respectively. Paired with the analysis of P-values at the significance level of $\alpha = 0.05$ (or $\alpha = 5.0*10^{-2}$ to compare for scientific notation), only DH5-$\alpha$ and 1$^\circ$FH2 do not make the cutoff. Failing to make the cutoff for P-value significance means that strains DH5-$\alpha$ and 1$^\circ$FH2 do not maintain similar means with and without UV exposure. Long story short, this data tells us that DH5-$\alpha$ and 1$^\circ$FH2 are not radioresistant, whereas the others may be. 
+
+```{r ttests1}
+ttest_path <- here::here("data", "ttests.csv")
+ttest <- read.csv(ttest_path) %>% select(-"Degrees.of.Freedom")
+kable(ttest, format.args = list(scientific = TRUE),
+col.names = c("Strain", "Mean at 0 sec","Mean at 60 Sec","T value","P value"), caption = " Welch’s two Sample t-test of CFU/mL from serial dilutions without normalizing", caption.short = "T-Tests Non-normalized", longtable = TRUE,
+booktabs = TRUE
+)
+```
 
 ## Growth Rates
 
-To tackle the first issue of different growth rates across strains, an overnight absorbency assay was run to calculate doubling times and ensure the show of radioresistance (or lack thereof) was not confused with slower growing characteristics of strains. 
-(insert growth curve)
-To calculate doubling time, the logarithmic growth portions of the curve were analyzed for the slope with highest linear fit. To ensure efficiency and accuracy, a script was written to consistently find the most linear portions of the curves (see Appendix for details/code). 
-(insert linear growth curve)
-(insert doubling time calculation/table)
+To tackle the first issue of different growth rates across strains, an overnight absorbency assay was run to calculate doubling times and ensure the show of radioresistance (or lack thereof) was not confused with slower growing characteristics of strains. The Tecan run yielded the absorbances of the strains' liquid cultures over the course of 24 hours at 30$^\circ$C to show the growth curves in Figure \ref@(fig:tecan). 
+
+```{r tecan, echo=FALSE, fig.cap= "Growth Curves from 24 hour Tecan Run in LB at 30°C. For each strain, 8 wells of a 96-well plate contained 0.1 mL of liquid culture. The Tecan was run for 24 hours without shaking, and data was output in the form of an Excel spreadsheet. Each point on the graph is the average log of absorbance between the 8 wells for one strain. This figure was produced using RStudio, ggplot, and Viridis."}
+tecan_avg_path <- here::here("data", "tecan_avg.csv")
+tecan_avg <- read.csv(tecan_avg_path, stringsAsFactors = FALSE)
+
+ggplot(tecan_avg, aes(x = time_hr, y = log_A600)) +
+  geom_point(aes(shape = strain, color = strain)) +
+  scale_color_viridis(discrete=TRUE)  +
+  labs(#title = "Growth Curves from 24 hour Tecan Run in LB",
+       x = "Time (hr)",
+       y = "Log(Absorbance*1000) at 600nm",
+       color = "Strain",
+       shape = "Strain") +
+  theme(text=element_text(family="serif"))
+```
+To calculate doubling time, the logarithmic growth portions of the curve were analyzed for the slope with highest linear fit. To ensure efficiency and accuracy, a script was written to consistently find the most linear portions of the curves (see Appendix for details/code). The selected points are show in Figure \ref@(tecan_linear), and the slopes were plugged into Equation \ref(eq:doubling) to calculate the doubling times in Table \@ref(lm_doubling).
+```{r tecan_linear, echo = FALSE, fig.cap= "Linear Portion of Growth Curves from 24 hour Tecan Run in LB. Filtered from the previous graph is the log-growth portion of the bacterial growth curves. Linear models were optimized by analyzing for the best regression values for adjacent collections of points. This figure was produced using RStudio, ggplot, and Viridis."}
+tecan_sets_path <- here::here("data", "tecan_sets.csv")
+tecan_sets <- read.csv(tecan_sets_path, stringsAsFactors = FALSE)
+
+ggplot(tecan_sets, aes(x = time_hr, y = log_A600)) +
+  geom_point(aes(shape = strain, color = strain)) +
+  geom_smooth(method = lm, se = FALSE, fullrange=TRUE, lwd = 0.5, aes(color = strain))+
+  scale_color_viridis(discrete=TRUE)  +
+  labs(#title = "Growth Curves from 24 hour Tecan Run in LB",
+       x = "Time (hr)",
+       y = "Log(Absorbance*1000) at 600nm",
+       color = "Strain",
+       shape = "Strain") +
+  theme(text=element_text(family="serif"))
+```
+```{r lm_doubling, echo = FALSE}
+doubling_path <- here::here("data", "doubling.csv")
+doubling <- read.csv(doubling_path) %>%
+  filter(strain != "CONTROL")
+
+kable(doubling, digits = 3,
+col.names = c("Strain", "Slope", "Doubling Time (hr)", "R Squared"), 
+caption = "Linear Regression Models and Calculated Doubling Times", 
+caption.short = "Doubling Times", longtable = TRUE,
+booktabs = TRUE
+)
+```
+
 The strain with fastest growth was 1$^{\circ}$F5 and D. rad was the slowest growing, which could be observed on the plates, as colonies were often confluent for 1$^{\circ}$F5 and sparse for D. rad despite both showing indications of radioresistance. This could be due to much higher CFU/mL in overnight cultures, as they did not grow to the capacity of the liquid media. The two controls, DH5-$\alpha$ and D. rad, also portrayed different rates, which aligned with the observation of more growth of DH5-$\alpha$ than D. rad on unexposed plates. This confirms that the absence of DH5-$\alpha$ in exposed plates was not due to slow growth rates, but from radiation damage. Using information from growth rates, further characterization of strains was performed in addition to secondary analysis of initial plate exposures after this information was processed. 
 
-1$^{\circ}$F5, 1$^{\circ}$FH2, and CM1, and the controls D. rad and DH5-$\alpha$
-
 ## Radioresistance Part 2: electric bungaloo
+
+Armed with the knowledge of growth rate, fresh serial dilutions were performed to determine the CFU/mL of each overnight culture. The counts were then used to determine the starting CFU/mL for all strains at $10^0$ dilution. This similar CFU/mL across dilutions when not irradiated allowed for direct comparison while taking into account growth rates via normalization of concentrations.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/n0secUV.png}
+\caption[Normalized UV - 0 seconds]{}
+\label{fig:n0secUV}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figure/n60secUV.png}
+\caption[Normalized UV - 60 seconds]{}
+\label{fig:n60secUV}
+\end{figure}
+
+There is a noticeable difference in growth for 1$^\circ$F5 after serial dilutions were normalized that can be seen when comparing Figures \ref(fig:60secUV) and \ref(fig:n60secUV). This indicates that the radioresistance observed in the first set of assays was from fast growth or high starting bacterial concentration rate rather than radioresistance. 1$^\circ$FH2 also had a slight change in growth density between Figures \ref(fig:60secUV) and \ref(fig:n60secUV), but that may be attributed to easier counting in dilutions now that CFU/mL was normalized. Before normalization, there would only be a semi confluent area that did not allow for accurate quantification. The normalized assay also brings to light the higher radioresistance of CM1 compared to the other isolates that was not observed to be as close to the survival rate of D. rad previously (Figure \@ref(n_sz_uv)). The controls D. rad and DH5-alpha remained consistent for both assays, as they were slightly slower growing than the other isolates and had distinct colonies that were easily countable. If anything, D. rad seemed to have an even higher percent survival (with an average closer to 150% survival than 100% survival in Figure Figure \@ref(n_sz_uv)) than the non-normalized assay. Whether this detail has to do with radioresistance or radiation promoted growth is unknown.
+
+
+```{r n_sz_uv, echo = FALSE, fig.cap= "Percent Survival of Normalized Strains in UV irradiation. For these serial dilutions, the starting concentration for all strains was $2.2*10^5$ CFU/mL to ensure that concentration of starting culture would not be a confounding variable in calculating and comparing percent survival. Again, for each strain, sets of three serial dilution plates were either exposed to UV for 60 seconds or not exposed at all. The CFU/mL were calculated and used to graph percent survival. Each boxplot consists of three percent survival values from each set of plates. This figure was produced using RStudio, ggplot, and Viridis."}
+n_sz_uv_path <- here::here("data", "n_sz_uv.csv")
+n_sz_uv <- read.csv(n_sz_uv_path, stringsAsFactors = FALSE)
+
+ggplot(n_sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
+  geom_boxplot() +
+  labs(#title = "Percent Survival of Normalized Strains in UV irradiation",
+       y = "Percent Survival")+
+  scale_color_viridis(discrete=TRUE)  +
+  theme(text=element_text(family="serif"))
+```
+
+Welch's two sample t-test was again run for the average CFU/mL between UV exposure states for each strain. Things of note this time in Table \@ref(ttests2) are that both D. rad and CM1 have very low t-values and very high P-values compared to the other strains. In addition to that, DH5-$\alpha$ has a high t-value, but not a statistically significant P-value. This means that while there is a large change in CFU/mL cause by UV exposure, but something isn't quite right.
+```{r ttests2}
+ttest2_path <- here::here("data", "ttests2.csv")
+ttest2 <- read.csv(ttest2_path)  %>% select(-"Degrees.of.Freedom")
+kable(ttest2, format.args = list(scientific = TRUE),
+col.names = c("Strain", "Mean at 0 sec","Mean at 60 Sec","T value","P value"), caption = "Welch’s two Sample t-test of CFU/mL from serial dilutions with normalizing", caption.short = "T-Tests Normalized", longtable = TRUE,
+booktabs = TRUE
+)
+```
+Looking back into the raw data, I found an outlier in CFU/mL for DH5$\alpha$ without UV exposure
+
+
+
+The t-tests run for this set of data compared average CFU/mL within strains between 60 seconds and 0 seconds of UV exposure. For t-tests the higher the t-value, the larger the difference that exists between the two samples. In Table \@ref(ttests1), the t-test values from largest to smallest correspond to DH5-$\alpha$, 1$^\circ$FH2, 1$^\circ$F5, CM1, then D. rad. This means that DH5-$\alpha$ saw the largest change in CFU/mL caused by UV exposure and D. rad saw the least, as expected for the negative and positive radioresistant controls, respectively. Paired with the analysis of P-values at the significance level of $\alpha = 0.05$ (or $\alpha = 5.0*10^{-2}$ to compare for scientific notation), only DH5-$\alpha$ and 1$^\circ$FH2 do not make the cutoff. Failing to make the cutoff for P-value significance means that strains DH5-$\alpha$ and 1$^\circ$FH2 do not maintain similar means with and without UV exposure. Long story short, this data tells us that DH5-$\alpha$ and 1$^\circ$FH2 are not radioresistant, whereas the others may be. 
+
+
+ The normalized serial dilutions proved invaluable in accurately assessing the radioresistance of bacterial strains by taking growth conditions and growth rates into account. This final UV assay confirmed strong radioresistance in CM1 compared to the other isolated RRR strains. The next step is to identify the species of CM1 and any DNA-repair mechanisms that it has developed while living in the pool of a nuclear reactor. 
+
+
 
 ## Identification 
 
 ### Gram Stains
+Gram stains performed on isolates revealed they were all rod-shaped, gram positive bacteria. It also allowed for basic measurements of bacteria using stage micrometers. This information aided in narrowing down potential strains with 16S sequencing. 
+(insert table of measurements, pictures, etc. need to recollect. Maybe can combine with Fig 4, along with not stained bacteria under dissection microscope)
 
 ### 16S PCR
+For genus level identification of isolates, 16S PCR and sequencing was performed. From these preliminary qualifications, all isolates have been found to be Bacilli. In addition to 16S sequencing, CM1 will also undergo whole genome sequencing, as it is the most radioresistant. These results aided in preparing information for WGS analysis. 
+
 
 ## Analysis
 

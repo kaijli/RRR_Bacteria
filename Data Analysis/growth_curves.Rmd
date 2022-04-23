@@ -30,6 +30,8 @@ tecan_avg <- tecan_tidy %>%
   select(strain, time_hr, log_A600) %>%
   filter(strain != "1F1")
 
+write.csv(tecan_avg,here::here("data", "tecan_avg.csv"), row.names = FALSE)
+
 ```
 
 ```{r plot1}
@@ -114,6 +116,9 @@ lms_sets <- lms_sets %>%
     transform(intercept = as.numeric(intercept),
             slope = as.numeric(slope),
             adj_r_sq = as.numeric(adj_r_sq))
+
+write.csv(tecan_sets,here::here("data", "tecan_sets.csv"), row.names = FALSE)
+write.csv(lms_sets,here::here("data", "lms_sets.csv"), row.names = FALSE)
 ```
 
 ```{r plot2}
@@ -135,10 +140,11 @@ doubling <- lms_sets %>%
          # g = 0.693/k,
          slope_min = slope/60,
          g = .301/slope_min, #in seconds, slope is 
-         doubling_hr = g/60/60) %>%
+         doubling_hr = g/60) %>%
   select(strain, slope, doubling_hr, adj_r_sq)
 doubling
 lms_sets
+write.csv(doubling,here::here("data", "doubling.csv"), row.names = FALSE)
 ```
 
 

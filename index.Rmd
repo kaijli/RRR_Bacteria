@@ -168,7 +168,7 @@ Enter one of many solutions: the radioresistant microbe. Even in the most barren
 
 So what is radioresistance? Radioresistance refers the level of ionizing radiation an organism can withstand. High levels of radioresistance are often found among insects, worms, plants, and certain extremophiles such as _Deinococcus radiodurans_ (D. rad) and tardigrades. To give a reference point, a lethal dose of radiation to humans is between 4-10 Grays, whereas D. rad can withstand up to 15,000 Grays. Of course, there’s a lot more complexities to the human body than to the single celled bacteria, but that is still many magnitudes more radiation in comparison. [noauthor_radiochemistry_nodate]
 
-The biological effects of radiation have also been thoroughly studied since the atomic bombings in World War II. Scientists have found various different stochastic or deterministic effects, where a certain minimum dose of radiation is needed or the effect occur by chance, respectively. Radiation, ionization, and excitation can directly effect any part of the body, such as damaging specific protein molecules or nucleic acids. However, organisms mostly consist of water, so radiation directly mutating a single nucleic acid is rare. Instead, most radiation directly interacts with water, and the energy absorbed by the water creates highly reactive free radicals, which contain unpaired electrons (Figure \@ref(fig:radiationDNA)). The unpaired electrons make free radicals highly reactive and chemically toxic to other molecules, in this case, other waters and free radicals. One possible chemical reaction is as follows:
+The biological effects of radiation have also been thoroughly studied since the atomic bombings in World War II. Scientists have found various different stochastic or deterministic effects, where a certain minimum dose of radiation is needed or the effect occur by chance, respectively. Radiation, ionization, and excitation can directly effect any part of the body, such as damaging specific protein molecules or nucleic acids. However, organisms mostly consist of water, so radiation directly mutating a single nucleic acid is rare. Instead, most radiation directly interacts with water, and the energy absorbed by the water creates highly reactive free radicals, which contain unpaired electrons (Figure \ref(fig:radiationDNA)). The unpaired electrons make free radicals highly reactive and chemically toxic to other molecules, in this case, other waters and free radicals. One possible chemical reaction is as follows:
 
 \begin{align*}
   &\mathrm{H_{2}O} \longrightarrow \mathrm{H_{2}O^{+} + e^-}   \qquad \text{First water molecule is irradiated} \\
@@ -180,7 +180,7 @@ The biological effects of radiation have also been thoroughly studied since the 
 \end{align*}
 
 
-The resulting hydrogen peroxide is a powerful oxidizing agent, and can thus affect molecules or cells that were not initially affected by radiation. While all organisms have some form of DNA or macromolecule repair mechanisms, most are not equipped for large scales of damage. Radiation damage is irreversible, so unless the damaged cells are quickly replaced by healthy ones, this can lead to the demise of organisms. [@cember_introduction_1996] 
+The resulting hydrogen peroxide is a powerful oxidizing agent, and can thus affect molecules or cells that were not initially affected by radiation. While all organisms have some form of DNA or macromolecule repair mechanisms, most are not equipped for large scales of damage. Radiation damage is irreversible, so unless the damaged cells are quickly replaced by healthy ones, this can lead to the demise of organisms [@cember_introduction_1996].
 
 
 # ```{r radiationDNA, out.width = '100%', fig.align='center', fig.cap='Interaction of radiation and DNA, adapted from Przystupski et al.'}
@@ -190,6 +190,7 @@ The resulting hydrogen peroxide is a powerful oxidizing agent, and can thus affe
 \centering
 \includegraphics[width=\textwidth]{figure/radiation_DNA.png}
 \caption[Interaction of radiation and DNA]{Interaction of radiation and DNA, adapted from Przystupski et al.[@przystupski_cytoprotective_2019], describes how high energy particles, which can be from radiation such as $\alpha$, $\beta$, and $\gamma$, interacts with deoxyribonucleic acid.}
+\label{fig:radiationDNA}
 \end{figure}
 
 In 1956, the discovery of D. rad as a contaminant in radiation-sterilized corned beef cans brought about DNA-centered molecular biology [@krisko_biology_2013]. Radiosensitivity varies between quiescent and slow dividing cells versus cells with high proliferation rates. Like with growth-arrested bacteria and antibiotics, quiescent and slow dividing cells are less radiosensitive. Growth-arrested bacteria inactivate antibiotic targets, allowing the cells to remain dormant until the threat has passed. In slow growing cells, DNA repair mechanisms have the time to repair damage many times more than in standard growing species, allowing them to make sure every new cell is well-made. For example, D. rad is just as radiosensitive as many other bacteria, but due to its investment in efficiency of survival over growth, not only does it present spectacular DNA repair capacity for radioresistance, but also resistance to desiccation [@krisko_biology_2013]. Other organisms studied for radioresistance include _Escherichia coli_ (_E. coli_), a less radioresistant bacteria found to produce resistant mutants based on environmental conditions and physiological factors, and melanin rich fungus found at the Chernobyl disaster site better protected against UV, solar, and ionizing radiation than its less pigmented relatives [@witkin_inherited_1946, @dadachova_ionizing_2007]. 
@@ -211,6 +212,7 @@ Let’s do a quick crash course on radiation and health physics. Sometimes, atom
 \centering
 \includegraphics[width=\textwidth]{figure/types of radiation.png}
 \caption[Types of Radiation]{Types of radiation and what's needed to shield from them,reprinted from American Nuclear Society [@noauthor_radiation_nodate].}
+\label{fig:typesOfRadiation}
 \end{figure}
 
 
@@ -225,6 +227,7 @@ Oh no, radiation sounds so scary! If I’m irradiated, can I turn into a non-tra
 \centering
 \includegraphics[width=\textwidth]{figure/daily radiation.png}
 \caption[Daily Radiation]{Typical sources of radiation in day-to-day life, reprinted from Ministry of the Environment, Government of Japan [@noauthor_comparison_nodate].}
+\label{fig:dailyRadiation}
 \end{figure}
 
 ## So what am I doing here?

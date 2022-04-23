@@ -25,15 +25,21 @@ booktabs = TRUE
 )
 ```
 
-The initial UV testing of the original 10 isolates from Spring 2021 and two controls—D. rad and DH5-$\alpha$— to compare the phenotype of these strains with D. Dev’s initial results. Using an inoculating loop, overnight cultures were streaked across a plate superimposed on a grid for organization. Vertical quadrants of the plates were exposed for 0, 15, 30, or 60 seconds to 302 nm UV light using a 2 UV$^{\text{TM}}$ Transilluminator (Analytik Jena GmbH, Jena, Germany).  Aluminum foil was used to shield unexposed or less-exposed areas, equally measured using the superimposed grid. After exposure, plates were incubated overnight at 30$^{\circ}$C and plate counts were performed. 
+The initial UV testing of the original 10 isolates from Spring 2021 and two controls—D. rad and DH5-$\alpha$— to compare the phenotype of these strains with D. Dev’s initial results. Using an inoculating loop, overnight cultures were streaked across a plate superimposed on a grid for organization. Vertical quadrants of the plates were exposed for 0, 15, 30, or 60 seconds to 302 nm UV light using a 2 UV$^{\text{TM}}$ Transilluminator (Analytik Jena GmbH, Jena, Germany) (see Figure \ref{fig:StreakUV}).  Aluminum foil was used to shield unexposed or less-exposed areas, equally measured using the superimposed grid. After exposure, plates were incubated overnight at 30$^{\circ}$C and plate counts were performed. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figure/StreakUV.png}
-\caption[UV - Streaks]{Examples of how UV exposures were performed on plate streaks. For the 60 second streak, aluminum foil would cover up to the line between 60 and 30 seconds, and after 30 seconds, the aluminum foil would then move to cover the 15 and 0 second areas. After 15 seconds of exposing both the 60 and 30 second areas, the foil would again move to conceal only the 0 second area. After another 15 seconds, the exposure is complete so that each area receives the indicated time of exposure to UV. Note that several of these strains are not analyzed later in the study due to their lack of UV resistance.}
+\caption[Streak UV]{Examples of how UV exposures were performed on plate streaks. For the 60 second streak, aluminum foil would cover up to the line between 60 and 30 seconds, and after 30 seconds, the aluminum foil would then move to cover the 15 and 0 second areas. After 15 seconds of exposing both the 60 and 30 second areas, the foil would again move to conceal only the 0 second area. After another 15 seconds, the exposure is complete so that each area receives the indicated time of exposure to UV. Note that several of these strains are not analyzed later in the study due to their lack of UV resistance.}
+\label{fig:StreakUV}
 \end{figure}
 
-The secondary use of UV exposure was with serial dilutions of $10^0$, $10^{-1}$, $10^{-2}$, $10^{-3}$, $10^{-4}$, $10^{-5}$, and $10^{-6}$ to observe percent survival of each 1$^{\circ}$F5, 1$^{\circ}$FH2, CM1, D. rad, and DH5-$\alpha$. The dilutions were made using 1:10 ratios from $10^0$ to $10^{-5}$ in 1X Phosphate-Buffered Saline (PBS) (Sodium Chloride 8 g/L, Potassium Chloride 0.2 g/L, Sodium Phosphate Dibasic 1.44 g/L, Potassium Phosphate Monobasic 0.245 g/L, pH 7.5 $\pm$0.2 at 25$^{\circ}$C). In a sterile fume hood, 10 $\mu$L from each dilution was spotted onto plates superimposed on a grid and left to dry completely before inverting for UV exposure and incubation. Sets of three plates were exposed to UV for 0, 30, or 60 seconds gel-side-down, then incubated overnight at 30$^{\circ}$C. After incubation, colonies were counted and CFU/mL from serial dilutions was used to calculate percent survival across the different exposure times.  
+The secondary use of UV exposure was with serial dilutions of $10^0$, $10^{-1}$, $10^{-2}$, $10^{-3}$, $10^{-4}$, $10^{-5}$, and $10^{-6}$ to observe percent survival of each 1$^{\circ}$F5, 1$^{\circ}$FH2, CM1, D. rad, and DH5-$\alpha$. The dilutions were made using 1:10 ratios from $10^0$ to $10^{-5}$ in 1X Phosphate-Buffered Saline (PBS) (Sodium Chloride 8 g/L, Potassium Chloride 0.2 g/L, Sodium Phosphate Dibasic 1.44 g/L, Potassium Phosphate Monobasic 0.245 g/L, pH 7.5 $\pm$0.2 at 25$^{\circ}$C). In a sterile fume hood, 10 $\mu$L from each dilution was spotted onto plates superimposed on a grid and left to dry completely before inverting for UV exposure and incubation. Sets of three plates were exposed to UV for 0, 30, or 60 seconds gel-side-down, then incubated overnight at 30$^{\circ}$C. After incubation, colonies were counted and CFU/mL from serial dilutions was used to calculate percent survival across the different exposure times as shown with Equation \ref{eq:psurvival}. 
+
+\begin{align*}
+  \text{Percent Survival} = \frac{\text{60 sec CFU/mL}}{\text{0 sec CFU/mL}} * 100% 
+  (\#eq:psurvival)
+\end{align*}
 
 The third set of UV exposures was performed with normalized to $2.2*10^5$ CFU/mL as the $10^0$ dilution across all strains for better comparison of percent survival and growth rate of strains. This was to confirm that noted UV resistance was not just from quick growth rates or from high CFU/mL in the starting culture. Normalization was performed by growing overnights of each strain, plating serial dilutions, incubating overnight, then counting CFU/mL. The CFU/mL counted from the first plating was then used to dilute all fresh overnight liquid culture to approximately $2.2*10^5$ CFU/mL for serial dilutions with UV exposure. 
 
@@ -71,7 +77,12 @@ The QIAquick Gel Extraction Kit (Qiagen Corp., Carlsbad, CA) was used to extract
 
 ## Growth Rate Analysis  
 
-To observe different growth rates independent of radioresistance, turbidity was measured by an Infinite 200 Pro microplate reader (Tecan, Männedorf, Switzerland) at 600 nm absorbance. Bacteria grown in LB were incubated at 30$^{\circ}$C for 24 hours at 30 minute intervals in a Greiner 96 Flat Bottom Transparent Polystyrene well plate (MilliporeSigma, St. Louis, Mo).
+To observe different growth rates independent of radioresistance, turbidity was measured by an Infinite 200 Pro microplate reader (Tecan, Männedorf, Switzerland) at 600 nm absorbance. Bacteria grown in LB were incubated at 30$^{\circ}$C for 24 hours at 30 minute intervals in a Greiner 96 Flat Bottom Transparent Polystyrene well plate (MilliporeSigma, St. Louis, Mo). The doubling times were calculated from the slope of the most linear portions of the log of absorbance values. The equation is as follows:
+
+\begin{align*}
+  \text{Doubling Time} = 0.301 * \frac{1}{\text{slope(sec)}} * \frac{60\text{sec}}{1 \text{min}} * \frac{60\text{min}}{1\text{hour}}
+  (\#eq:doubling)
+\end{align*}
 
 ## Gram Staining
 
