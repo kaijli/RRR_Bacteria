@@ -7,18 +7,93 @@ MathJax.Hub.Config({
 });
 </script>
 
+```{r include_packages3, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+# This chunk ensures that the thesisdown package is
+# installed and loaded. This thesisdown package includes
+# the template files for the thesis.
+if (!require(remotes)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("remotes", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste('You need to run install.packages("remotes")",
+            "first in the Console.')
+    )
+  }
+}
+if (!require(dplyr)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("dplyr", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste(
+        'You need to run install.packages("dplyr")',
+        "first in the Console."
+      )
+    )
+  }
+}
+if (!require(ggplot2)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("ggplot2", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste(
+        'You need to run install.packages("ggplot2")',
+        "first in the Console."
+      )
+    )
+  }
+}
+if (!require(bookdown)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    install.packages("bookdown", repos = "https://cran.rstudio.com")
+  } else {
+    stop(
+      paste(
+        'You need to run install.packages("bookdown")',
+        "first in the Console."
+      )
+    )
+  }
+}
+if (!require(thesisdown)) {
+  if (params$`Install needed packages for {thesisdown}`) {
+    remotes::install_github("ismayc/thesisdown")
+  } else {
+    stop(
+      paste(
+        "You need to run",
+        'remotes::install_github("ismayc/thesisdown")',
+        "first in the Console."
+      )
+    )
+  }
+}
+
+library(thesisdown)
+library(dplyr)
+library(ggplot2)
+library(graphics)
+library(knitr)
+library(viridis)
+# Set how wide the R output will go
+options(width = 70)
+```
+
 ## Radioresistance? Part 1
 
-While many strains of bacteria were isolated from the initial sampling of the Reed Research Reactor (RRR) primary filtration system, only 3 strains from the Reed Research Reactor water system were used for the irradiation in addition controls _Deinococcus radiodurans_ (D. rad), the radioresistant positive control, and _Escherichia coli_ (_E. coli_) strain DH5-$\alpha$, the radiosensitive negative control. From UV-exposed serial dilutions of strains, CFU/mL were calculated and compared between strains using percent survival. With Figure \ref(fig:0secUV), the average CFU/mL calculated from colony counts across triplicate plates was used as the base, expected number of colonies if the strains were radioresistant. That number is then compared to the average CFU/mL for each strain in Figure \ref(fig:60secUV) as per Equation \ref(eq:psurvival).
+While many strains of bacteria were isolated from the initial sampling of the Reed Research Reactor (RRR) primary filtration system, only 3 strains from the Reed Research Reactor water system were used for the irradiation in addition controls _Deinococcus radiodurans_ (D. rad), the radioresistant positive control, and _Escherichia coli_ (_E. coli_) strain DH5-$\alpha$, the radiosensitive negative control. From UV-exposed serial dilutions of strains, CFU/mL were calculated and compared between strains using percent survival. With Figure \ref(fig:0secUV), the average CFU/mL calculated from colony counts across triplicate plates was used as the base, expected number of colonies if the strains were radioresistant. That number is then compared to the average CFU/mL for each strain in Figure \ref(fig:60secUV) as per Equation \ref{eq:psurvival}.
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figure/0secUV.png}
 \caption[0 second UV]{Growth of strains without UV interferance. Serial dilution LB plate without CFU/mL normalization, unexposed to UV light, and after overnight growth at 30$^\circ$C. Serial dilutions were made using fresh overnight cultures and LB. Each strain is labeled with their own row, and dilutions are labeld for each column.}
 \label{fig:0secUV}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figure/60secUV.png}
 \caption[60 second UV]{Growth of strains with UV interferance. Serial dilution LB plate without CFU/mL normalization, exposed to UV light for 60 seconds, and after overnight growth at 30$^\circ$C. Serial dilutions were made using fresh overnight cultures and LB. Each strain is labeled with their own row, and dilutions are labeld for each column.}
@@ -53,7 +128,7 @@ booktabs = TRUE
 
 ## Growth Rates
 
-To tackle the first issue of different growth rates across strains, an overnight absorbency assay was run to calculate doubling times and ensure the show of radioresistance (or lack thereof) was not confused with slower growing characteristics of strains. The Tecan run yielded the absorbances of the strains' liquid cultures over the course of 24 hours at 30$^\circ$C to show the growth curves in Figure \ref@(fig:tecan). 
+To tackle the first issue of different growth rates across strains, an overnight absorbency assay was run to calculate doubling times and ensure the show of radioresistance (or lack thereof) was not confused with slower growing characteristics of strains. The Tecan run yielded the absorbances of the strains' liquid cultures over the course of 24 hours at 30$^\circ$C to show the growth curves in Figure \@ref(fig:tecan). 
 
 ```{r tecan, echo=FALSE, fig.cap= "Growth Curves from 24 hour Tecan Run in LB at 30°C. For each strain, 8 wells of a 96-well plate contained 0.1 mL of liquid culture. The Tecan was run for 24 hours without shaking, and data was output in the form of an Excel spreadsheet. Each point on the graph is the average log of absorbance between the 8 wells for one strain. This figure was produced using RStudio, ggplot, and Viridis."}
 tecan_avg_path <- here::here("data", "tecan_avg.csv")
@@ -69,7 +144,7 @@ ggplot(tecan_avg, aes(x = time_hr, y = log_A600)) +
        shape = "Strain") +
   theme(text=element_text(family="serif"))
 ```
-To calculate doubling time, the logarithmic growth portions of the curve were analyzed for the slope with highest linear fit. To ensure efficiency and accuracy, a script was written to consistently find the most linear portions of the curves (see Appendix for details/code). The selected points are show in Figure \ref@(fig:tecan_linear), and the slopes were plugged into Equation \ref(eq:doubling) to calculate the doubling times in Table \@ref(tab:lm_doubling).
+To calculate doubling time, the logarithmic growth portions of the curve were analyzed for the slope with highest linear fit. To ensure efficiency and accuracy, a script was written to consistently find the most linear portions of the curves (see Appendix for details/code). The selected points are show in Figure \@ref(fig:tecan_linear), and the slopes were plugged into Equation \ref{eq:doubling} to calculate the doubling times in Table \@ref(tab:lm_doubling).
 ```{r tecan_linear, echo = FALSE, fig.cap= "Linear Portion of Growth Curves from 24 hour Tecan Run in LB. Filtered from the previous graph is the log-growth portion of the bacterial growth curves. Linear models were optimized by analyzing for the best regression values for adjacent collections of points. This figure was produced using RStudio, ggplot, and Viridis."}
 tecan_sets_path <- here::here("data", "tecan_sets.csv")
 tecan_sets <- read.csv(tecan_sets_path, stringsAsFactors = FALSE)
@@ -104,14 +179,14 @@ The strain with fastest growth was 1$^{\circ}$F5 and D. rad was the slowest grow
 
 Armed with the knowledge of growth rate, fresh serial dilutions were performed to determine the CFU/mL of each overnight culture. The counts were then used to determine the starting CFU/mL for all strains at $10^0$ dilution. This similar CFU/mL across dilutions when not irradiated allowed for direct comparison while taking into account growth rates via normalization of concentrations.
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figure/n0secUV.png}
 \caption[Normalized UV - 0 seconds]{}
 \label{fig:n0secUV}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figure/n60secUV.png}
 \caption[Normalized UV - 60 seconds]{}
@@ -161,7 +236,7 @@ Table \@ref(tab:ttests2) does aid in observing that 1$^\circ$F5 no longer seems 
 ### Gram Stains
 Gram stains performed on isolates revealed they were all rod-shaped, gram positive bacteria. It also allowed for basic measurements of bacteria using stage micrometers, as shown in Figure \ref(fig:GramStain). This information aided in narrowing down potential strains with 16S sequencing. The strains in this study, CM1, 1$^\circ$F5, and 1$^\circ$FH2, are all Gram-negative bacteria. This means that they all have two layers of membranes and are less susceptible antibiotics and lysing agents. For this study in particular, this made DNA isolation of CM1 for genome analysis more difficult, with lower DNA concentration yield. 
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figure/GramStain.png}
 \caption[CM1 Gram Stain]{Gram stain of strain CM1 at 400x magnification. A line equal to the length of 10 units demarcated on the lens is indicated on the image in black font to be 25 $\mu$m. A single bacterium is boxed close and lined up with the tick-marks to show that the size is approximately 5 $\mu$m. The purple color of the stained cells indicate that CM1 is Gram-negative and features both an outer membrane and a cytoplamic membrane, rather than a cytoplasmic membrane and a thick peptidoglycan layer.}

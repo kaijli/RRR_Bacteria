@@ -1,4 +1,4 @@
-```{r include_packages_2, include = FALSE}
+```{r include_packages_4, include = FALSE}
 # This chunk ensures that the thesisdown package is
 # installed and loaded. This thesisdown package includes
 # the template files for the thesis and also two functions
