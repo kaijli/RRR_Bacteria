@@ -12,7 +12,6 @@ library(googlesheets4)
 library(viridis)
 ```
 
-#
 ```{r}
 url <- "https://docs.google.com/spreadsheets/d/1JN0UHSJSlPWP07gGkodhEuOzFkuukClbuDjI7rDcokc/edit?usp=sharing"
 streaks <- read_sheet(ss = url,
@@ -23,7 +22,6 @@ nming_dils <- read_sheet(ss = url,
                      sheet = "Normalizing_Dilutions")
 nmed_dils <- read_sheet(ss = url,
                      sheet = "Normalized_Dilutions")
-
 ```
 
 ```{r eval = F}
@@ -76,8 +74,6 @@ ggplot(pcr_strains, aes(x = Time, y = Colonies, color = Strain)) +
   
 ```
 
-
-
 ```{r p_survival}
 sixtys_uv <- srl_dils %>%
   filter(Time == 60) %>%
@@ -95,15 +91,15 @@ sz_uv <- sz_uv %>%
   mutate(p_survival = CFU_60/CFU_0)
 
 write.csv(sz_uv,here::here("data", "sz_uv.csv"), row.names = FALSE)
+# 
+# ggplot(sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
+#   geom_boxplot() +
+#   labs(title = "Percent Survival of Strains in UV irradiation",
+#        y = "Log10 of Percent Survival")+
+#   scale_color_viridis(discrete=TRUE)  +
+#   theme(text=element_text(family="serif"))
 
-ggplot(sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
-  geom_boxplot() +
-  labs(title = "Percent Survival of Strains in UV irradiation",
-       y = "Log10 of Percent Survival")+
-  scale_color_viridis(discrete=TRUE)  +
-  theme(text=element_text(family="serif"))
-
-ggplot(sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
+ggplot(sz_uv, aes(x = Strain, y = p_survival*100, color = Strain)) +
   geom_boxplot() +
   labs(title = "Percent Survival of Strains in UV irradiation",
        y = "Percent Survival")+
@@ -167,14 +163,14 @@ n_sz_uv <- n_sz_uv %>%
 
 write.csv(n_sz_uv,here::here("data", "n_sz_uv.csv"), row.names = FALSE)
 
-ggplot(n_sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
-  geom_boxplot() +
-  labs(title = "Percent Survival of Normalized Strains in UV irradiation",
-       y = "Log10 of Percent Survival")+
-  scale_color_viridis(discrete=TRUE)  +
-  theme(text=element_text(family="serif"))
+# ggplot(n_sz_uv, aes(x = Strain, y = log(p_survival), color = Strain)) +
+#   geom_boxplot() +
+#   labs(title = "Percent Survival of Normalized Strains in UV irradiation",
+#        y = "Log10 of Percent Survival")+
+#   scale_color_viridis(discrete=TRUE)  +
+#   theme(text=element_text(family="serif"))
 
-ggplot(n_sz_uv, aes(x = Strain, y = p_survival, color = Strain)) +
+ggplot(n_sz_uv, aes(x = Strain, y = p_survival*100, color = Strain)) +
   geom_boxplot() +
   labs(title = "Percent Survival of Normalized Strains in UV irradiation",
        y = "Percent Survival")+
